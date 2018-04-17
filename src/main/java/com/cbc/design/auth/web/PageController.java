@@ -1,0 +1,144 @@
+package com.cbc.design.auth.web;
+
+import com.cbc.design.auth.domain.GoodCritic;
+import com.cbc.design.auth.domain.User;
+import com.cbc.design.auth.service.*;
+import com.cbc.design.auth.web.dto.MyFriendDTO;
+import com.cbc.design.common.MyUtil;
+import com.cbc.design.common.RepeatSubmit;
+import com.cbc.design.common.TokenProcessor;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Created by cbc on 2018/3/30.
+ */
+@Controller
+@AllArgsConstructor
+public class PageController {
+
+    private final FriendService friendService;
+
+    private final PublishCriticService publishCriticService;
+
+    private final CommentCriticService commentCriticService;
+
+    private final CollectionCriticService collectionCriticService;
+
+    private final GoodCriticService goodCriticService;
+
+    /**
+     *  第一步注册
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/register",method = {RequestMethod.GET,RequestMethod.POST})
+    public String register(Model model, HttpServletRequest request){
+        TokenProcessor tokenProcessor = TokenProcessor.getInstance();
+        String token = tokenProcessor.generateToken();
+        tokenProcessor.saveToken(request,"register1_token",token);
+        model.addAttribute("token",token);
+        //获取注册协议
+        String txt = MyUtil.getInstance().getTxt();
+        model.addAttribute("txt",txt);
+        return "/registered/register";
+    }
+
+    /**
+     *  第二步 注册
+     * @param photo
+     * @param phone
+     * @param code_phone
+     * @param token
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/register2",method = {RequestMethod.POST,RequestMethod.GET})
+    public String register(@RequestParam String photo,
+                           @RequestParam String email,
+                           @RequestParam String phone,
+                           @RequestParam String code_phone,
+                           @RequestParam String token,
+                           Model model,
+                           HttpServletRequest request){
+        HttpSession session = request.getSession();
+        TokenProcessor tokenProcessor = TokenProcessor.getInstance();
+        boolean isRepeatSubmit = RepeatSubmit.isRepeatSubmit(token, (String)session.getAttribute("register1_token"));
+        //如果重复提交了表单，回到第一个注册页面
+        if(isRepeatSubmit){
+            return register(model,request);
+        }else{
+            tokenProcessor.deleteToken(request,"register1_token");
+        }
+        //
+        session.setAttribute("phone",phone);
+        String register2_token = tokenProcessor.generateToken();
+        session.setAttribute("register2_token",register2_token);
+        session.setAttribute("email",email);
+        model.addAttribute("token",register2_token);
+        model.addAttribute("phone",phone);
+        model.addAttribute("photo",photo);
+        model.addAttribute("code_phone",code_phone);
+        return "/registered/register2";
+    }
+
+    /**
+     *  第三个注册页面
+     * @return
+     */
+    @GetMapping("/register3")
+    public String register3(){
+
+        return "/registered/register3";
+    }
+
+    /**
+     * 首页
+     * @param user
+     * @param model
+     * @return
+     */
+    @GetMapping({"/","/home"})
+    public String home(@AuthenticationPrincipal User user, Model model, Pageable pageable){
+        Long userId = user.getId();
+        List<MyFriendDTO> friends = friendService.getFriendByUser(userId);
+        model.addAttribute("user",user);
+        model.addAttribute("myFriends",friends);
+        model.addAttribute("action",1);
+
+        List<Long> userIds = friends.stream().map(MyFriendDTO::getFriendId).collect(Collectors.toList());
+        userIds.add(user.getId());
+        /** 获取所有用户 说说信息（包括自己） */
+        model.addAttribute("result",publishCriticService.getUserPublish(userIds,pageable));
+        //获取当前用户的评论数量
+        model.addAttribute("comments", commentCriticService.countCommentCountByUserId(userId));
+
+        //获取当前用户的  说说数量
+        model.addAttribute("critics", publishCriticService.countPublishCountByUserId(userId));
+        // 获取当前用户的  点赞数量
+        model.addAttribute("goods", goodCriticService.countGoodCountByUserId(userId));
+        // 获取当前用户的  收藏数量
+        model.addAttribute("collections", collectionCriticService.countCollectionCountByUserId(userId));
+
+
+        return "home";
+    }
+
+
+
+}
