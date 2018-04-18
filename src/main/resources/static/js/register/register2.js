@@ -355,7 +355,7 @@ $(function () {
 			toolphoto2.show();
 			toolphoto.hide();
 			toolphone2.hide();
-			email.hide();
+			email1.hide();
 		} else {
 			toolphoto2.hide();
 			right_photo = true;
@@ -447,7 +447,7 @@ $(function () {
 		}
 		if (right_code_phone && right_phone && right_photo){
 			$.ajax({
-				type:"post",
+				type:"POST",
 				url:"/api/register/check/phone",
 				dataType:"JSON",
 				data:{photo:photo.val(),code: code.val(),code_mail:code_phone.val()},
@@ -460,7 +460,7 @@ $(function () {
                         toolnum.show();
                         loadimage();
 					} else  if (data.data == '1'){
-						$('.form').submit();
+						$('.register-info').submit();
 					}
 				},
 				error:function () {

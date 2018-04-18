@@ -63,25 +63,25 @@ header ul li .num{
 header .current{
 	color:#1E88C7;
 }
-
-
 form{
 	font-weight:500;
 	font-size:20px;
 	padding:0 0;
-	width:390px;
+	width:465px;
 	height:100%;
-	margin:80px auto ;
+	margin:45px auto ;
 }
 form .text{
 	text-align:right;
 }
-form .name, .password, .password2, .phone .nickname{
+form .name, .password, .password2, .phone, .nickname{
 	border-radius:5px;
-	margin:5px 0;
 	font-size:18px;
 	height:30px;
 	width:250px;
+	border: #666 1px solid;
+	margin-left: 25px;
+	padding-left: 10px;
 }
 form .toolname, .toolpassword, .toolpassword2{
 	color:#1E88C7;
@@ -96,6 +96,19 @@ form .next{
 	font-weight:900;
 	cursor: pointer;
 	font-size:18px;
+	margin-left: 26px;
+}
+.register2-list{
+	border-collapse:separate;
+	border-spacing:0 26px;
+}
+.alert-info{
+	position: absolute;
+	margin-left: 25px;
+}
+.icon-arrow{
+	width: 16px;
+	transform: translateY(-3px);
 }
 
 

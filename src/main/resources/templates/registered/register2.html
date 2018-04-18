@@ -16,12 +16,12 @@
                     <span class="current-num">1</span>
                     <span class="current">验证邮箱</span>
                 </li>
-                <span class="cc">--></span>
+                <img class="icon-arrow" src="/image/arrow.png" />
                 <li class="current2">
                     <span class="current-num">2</span>
                     <span class="current">填写用户名和密码</span>
                 </li>
-                <span class="cc">--></span>
+                <img class="icon-arrow" src="/image/arrow.png" />
                 <li class="c">
                     <span class="num">3</span>验证成功
                 </li>
@@ -30,59 +30,42 @@
         <div class="page">
             <form class="form" id="form" method="post">
                 <input type="hidden" name="token" th:value="${token}"/>
-                <table>
+                <table class="register2-list">
                     <tr>
                         <td class="text">手机号码：</td>
-                        <td><input type="text" th:value="${phone}" class="phone" id="phone" readonly="readonly" name="phone"/></td>
+                        <td>
+                            <input type="text" th:value="${phone}" class="phone" id="phone" readonly="readonly" name="phone" style="border: none"/>
+                        </td>
                     </tr>
                     <tr>
                         <td class="text">用户名：</td>
                         <td>
                             <input type="text" placeholder="请输入用户名" class="name" id="name" name="username" autofocus="autofocus" maxlength="18"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="toolname" id="toolname"></div>
+                            <div class="alert-info toolname" id="toolname"></div>
                         </td>
                     </tr>
                     <tr>
                         <td class="text">密码：</td>
                         <td>
                             <input type="password" placeholder="请输入密码" id="password" name="password" class="password" maxlength="18"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="toolpassword" id="toolpassword"></div>
+                            <div class="alert-info toolpassword" id="toolpassword"></div>
                         </td>
                     </tr>
                     <tr>
                         <td class="text">确认密码：</td>
                         <td>
                             <input type="password" placeholder="请确认密码" id="password2" class="password2" maxlength="18"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="toolpassword2" id="toolpassword2"></div>
+                            <div class="alert-info toolpassword2" id="toolpassword2"></div>
                         </td>
                     </tr>
                     <tr>
                         <td class="text">昵称：</td>
                         <td>
                             <input type="text" placeholder="请输入昵称" id="nickname" class="nickname" name ="nickname" maxlength="18"/>
+                            <div class="alert-info toolnickname" id="toolnickname"></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="toolnickname" id="toolnickname"></div>
-                        </td>
-                    </tr>
+
                     <input id="email" name="email" style="display: none" th:value="${session.email}"></input>
 
                     <tr>

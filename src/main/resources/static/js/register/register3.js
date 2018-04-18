@@ -2,7 +2,6 @@
  *
  */
 function check() {
-    debugger;
     var name = form.name.value;
     var password = form.password.value;
     var password2 = form.password2.value;

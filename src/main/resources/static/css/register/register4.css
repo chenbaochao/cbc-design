@@ -81,4 +81,8 @@ header .current{
 	width:240px;
 	font-weight: 900;
 }
+.icon-arrow{
+	width: 16px;
+	transform: translateY(-3px);
+}
 

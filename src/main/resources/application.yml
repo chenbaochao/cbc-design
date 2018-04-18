@@ -39,7 +39,7 @@ logging:
 security:
   propreties:
     rememberMeSeconds: 30
-#    isAutoCreateRememberTable: true  首次启动设为true
+    isAutoCreateRememberTable: true  首次启动设为true
 
 mail:
   fromMail:
