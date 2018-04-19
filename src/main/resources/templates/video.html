@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--
+    <title th:text="${user.nickname}+'の首页'">首页</title>
+-->
+    <link href="/css/all.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/home/home.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <link rel="stylesheet" href="../../../../../astudy/music-player/src/common/stylus/mixin.styl">
+</head>
+<script src="/js/home/home.js"></script>
+<body>
+<header th:include="header :: copy"></header>
+<div class="swiper-container home-swiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="https://puui.qpic.cn/tv/0/22560718_1680580/0" class="pic">
+        </div>
+        <div class="swiper-slide">
+            <img src="https://img1.gtimg.com/v/pics/hv1/230/56/2271/147686285.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="https://img1.gtimg.com/tv/pics/hv1/168/65/2264/147233343.jpg">
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+<!--推荐内容-->
+<div class="home-content">
+    <div>
+        <div class="recommend-tit" >
+            <img src="/image/movie-red.png" >
+            <span class="recommend-name">热门电影</span>
+            <button class="change">换一批</button>
+        </div>
+        <ul class="home-recommend-list">
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <div class="recommend-tit" >
+            <img src="/image/movie-red.png" >
+            <span class="recommend-name">正在上映</span>
+            <button class="change">换一批</button>
+        </div>
+        <ul class="home-recommend-list">
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <div class="recommend-tit" >
+            <img src="/image/movie-red.png" >
+            <span class="recommend-name">即将上映</span>
+            <button class="change">换一批</button>
+        </div>
+        <ul class="home-recommend-list">
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+            <li class="home-recommend-cont">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg">
+                <p class="recommend-cont-tit">电影1</p>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: true,//可选选项，自动滑动
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        }
+    })
+</script>
+</body>
+</html>

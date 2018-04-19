@@ -6,7 +6,7 @@ body {
     margin: 0 auto;
     font-size: 16px;
     width: 100%;
-    background: url("https://upload-images.jianshu.io/upload_images/3424642-51f5f7d6fa0e86be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240");
+    /*background: url("https://upload-images.jianshu.io/upload_images/3424642-51f5f7d6fa0e86be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240") top left no-repeat;*/
     background-size: cover;
     opacity: .9;
     font-weight: 700;
@@ -74,7 +74,7 @@ div.specific_comment {
 
 div.all_content, iframe.all_content {
     top: 2.3em;
-    width: 1000px;
+    width: 1200px;
     margin: 0 auto;
     background: #104E8B;
     min-height: 900px;

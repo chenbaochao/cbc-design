@@ -118,12 +118,15 @@ public class PageController {
         Long userId = user.getId();
         List<MyFriendDTO> friends = friendService.getFriendByUser(userId);
         model.addAttribute("user",user);
+/*
         model.addAttribute("myFriends",friends);
         model.addAttribute("action",1);
 
         List<Long> userIds = friends.stream().map(MyFriendDTO::getFriendId).collect(Collectors.toList());
         userIds.add(user.getId());
-        /** 获取所有用户 说说信息（包括自己） */
+        */
+/** 获取所有用户 说说信息（包括自己） *//*
+
         model.addAttribute("result",publishCriticService.getUserPublish(userIds,pageable));
         //获取当前用户的评论数量
         model.addAttribute("comments", commentCriticService.countCommentCountByUserId(userId));
@@ -134,11 +137,20 @@ public class PageController {
         model.addAttribute("goods", goodCriticService.countGoodCountByUserId(userId));
         // 获取当前用户的  收藏数量
         model.addAttribute("collections", collectionCriticService.countCollectionCountByUserId(userId));
+*/
 
 
         return "home";
     }
 
+    @GetMapping("/video")
+    public String video(){
+        return "video";
+    }
 
+    @GetMapping("/video-play")
+    public String videoPlay(){
+        return "video-play";
+    }
 
 }
