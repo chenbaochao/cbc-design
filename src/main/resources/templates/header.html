@@ -5,42 +5,50 @@
 <header th:fragment="copy">
     <link rel="stylesheet" href="/css/header.css"/>
     <script src="/js/header.js"></script>
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css"/>
     <div class="header-wrapper">
-        <ul class="layui-nav" style="width: 1350px;margin: 0 auto" >
-            <li class="layui-nav-item">
-                <a href="/home">
+        <ul class="header-nav">
+            <li>
+                <a href="/home" class="nav-item">
             <span class="header_title_text">
                 CBC微生活
             </span>
                 </a>
             </li>
-            <li class="layui-nav-item layui-this">
-                <a href="/home" class="header_home_current ">
+            <li>
+                <a href="/home" class="nav-item nav-item-active nav-hover-border">
                     <img src="/image/header-home.png" class="header-icon"/>首页
                 </a>
             </li>
-            <li class="layui-nav-item">
-                <a href="">
+            <li>
+                <a href="" class="nav-item nav-hover-border">
                     <img src="/image/music.png" class="header-icon"/>音乐
                 </a>
             </li>
-            <li class="layui-nav-item">
-                <a href="" >
+            <li>
+                <a href=""  class="nav-item nav-hover-border">
                     <img src="/image/book.png" class="header-icon"/>书籍
                 </a>
             </li>
-            <li class="layui-nav-item">
-                <a href="" >
+            <li>
+                <a href="" class="nav-item nav-hover-border">
                     <img src="/image/movie.png" class="header-icon"/>电影
                 </a>
             </li>
-            <li class="layui-nav-item" style="float: right">
-                <a href="" >
+            <li style="float: right">
+                <a href=""  class="nav-item">
                     <img src="/image/login_user.png" class="header-icon"/>登录/注册
+                </a>
+                <a href=""  class="nav-item hidden">
+                    <img src="/image/login_user.png" class="header-icon"/>您好，CBC！
                 </a>
             </li>
         </ul>
     </div>
+    <script>
+        $('.nav-hover-border').click(function () {
+            $('.nav-hover-border').removeClass('nav-item-active');
+            $(this).addClass('nav-item-active')
+        })
+    </script>
 </header>
 </html>
