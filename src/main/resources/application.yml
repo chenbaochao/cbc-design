@@ -33,13 +33,13 @@ logging:
   level:
     root: info
     com.cbc.design: debug
-    org.springframework.security: debug
+#    org.springframework.security: debug
 #    org.springframework.security.web.access.intercept: debug
 
 security:
   propreties:
     rememberMeSeconds: 30
-    isAutoCreateRememberTable: true  首次启动设为true
+#    isAutoCreateRememberTable: true  首次启动设为true
 
 mail:
   fromMail:

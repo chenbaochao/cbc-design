@@ -115,15 +115,14 @@ public class PageController {
 
     /**
      * 首页
-     * @param user
      * @param model
      * @return
      */
     @GetMapping({"/","/home"})
-    public String home(@AuthenticationPrincipal User user, Model model, Pageable pageable){
-        Long userId = user.getId();
+    public String home(Model model, Pageable pageable){
+/*        Long userId = user.getId();
         List<MyFriendDTO> friends = friendService.getFriendByUser(userId);
-        model.addAttribute("user",user);
+        model.addAttribute("user",user);*/
 
         List<Video> carouselPics = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CAROUSEL_KEY, TAGS[0]);
         List<Video> recommends = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_RECOMMEND_KEY, TAGS[0]);
