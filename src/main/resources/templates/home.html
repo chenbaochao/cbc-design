@@ -9,7 +9,7 @@
     <meta name="applicabledevice" content="mobile">
 
     <title th:text="${user.nickname}+'の首页'">首页</title>
-    <link href="/css/all.css" rel="stylesheet"/>
+    <!--<link href="/css/all.css" rel="stylesheet"/>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -38,7 +38,9 @@
     <div class="recommend-tit">
         <img src="/image/movie-red.png">
         <span class="recommend-name">电影</span>
-        <button class="refresh">换一批</button>
+        <button class="refresh">
+            <img src="/image/refresh.png"/>换一批
+        </button>
     </div>
     <ul class="home-recommend-list">
         <li class="home-recommend-cont" th:each="movie,iterStat: ${movies}" th:if="${iterStat.index} < 6">

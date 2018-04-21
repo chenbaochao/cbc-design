@@ -1,9 +1,142 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
+    <meta name="applicabledevice" content="mobile">
+    <!--<link rel="stylesheet" href="/css/home/home.css"/>-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/css/video-play/video-play.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.0.0.js"></script>
 </head>
-
 <body>
-<iframe src="http://api.bbbbbb.me/svip/v.php?url=https://v.qq.com/x/cover/pi3eo11a5faz9oe.html" style="width:900px;height: 500px;border:none"></iframe>
+    <header th:include="header :: copy"></header>
+
+    <div class="main">
+        <p class="title">小萝莉的神猴大叔
+            <!--<span class="video-score">-->
+                <!--<span class="video-score01">8.</span>-->
+                <!--<span class="video-score02">2</span>-->
+            <!--</span>-->
+        </p>
+        <div class="pr">
+            <div class="video-player">
+                <!--<div class="tanmu">gfdgfsx</div>-->
+                <!--<iframe src="http://api.bbbbbb.me/svip/v.php?url=https://v.qq.com/x/cover/pi3eo11a5faz9oe.html" class="video" ></iframe>-->
+                <iframe src="http://api.bbbbbb.me/svip/v.php?url=https://v.qq.com/x/cover/pi3eo11a5faz9oe.html"
+                        class="video-frame"
+                        frameborder="0"
+                        width="100%"
+                        height="100%"
+                        scrolling="no"
+                        allowfullscreen="true"
+                        webkitallowfullscreen="true"
+                        mozallowfullscreen="true"></iframe>
+            </div>
+            <!--弹幕评论区-->
+            <div class="live-comment-body">
+                <div class="live-comment-box">
+                    <div class="live-comment-tit">
+                        <span class="live-comment-cont">弹幕内容</span>
+                        <span class="live-comment-time">发送时间</span>
+                    </div>
+                    <ul class="live-comment-list">
+                        <li>
+                            <span class="live-comment-cont">第一条弹幕第第一条第一条弹幕第第一条第一条弹幕第第一条</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li>
+                        <li>
+                            <span class="live-comment-cont">第二条弹幕</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li>
+                        <li>
+                            <span class="live-comment-cont">第二条弹幕</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li>
+                        <li>
+                            <span class="live-comment-cont">第二条弹幕</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li>
+                        <li>
+                            <span class="live-comment-cont">第二条弹幕</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li>
+                        <li>
+                            <span class="live-comment-cont">第二条弹幕</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li>
+                        <li>
+                            <span class="live-comment-cont">第二条弹幕</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li>
+                        <li>
+                            <span class="live-comment-cont">第二条弹幕</span>
+                            <span class="live-comment-time">04-21&nbsp;14:46</span>
+                        </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li><li>
+                        <span class="live-comment-cont">第二条弹幕</span>
+                        <span class="live-comment-time">04-21&nbsp;14:46</span>
+                    </li>
+
+
+                    </ul>
+                </div>
+                <div>
+                    <textarea type="text" class="write-live-comment" placeholder="您可以在这里输入弹幕吐槽哦~" maxlength="31"></textarea>
+                    <button class="send-live-comment">发送</button>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <p class="title">《小萝莉的神猴大叔》主演</p>
+            <div class="main-actor">
+                <div class="actor-info">
+                    <img src="/image/actor.jpg">
+                    <span class="actor-name">主演1</span>
+                </div>
+                <div class="actor-info">
+                    <img src="/image/actor.jpg">
+                    <span class="actor-name">主演1</span>
+                </div>
+                <div class="actor-info">
+                    <img src="/image/actor.jpg">
+                    <span class="actor-name">主演1</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

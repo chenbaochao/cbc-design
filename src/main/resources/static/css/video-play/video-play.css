@@ -1,0 +1,191 @@
+.pr {
+    position: relative;
+}
+
+.tanmu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    z-index: 9;
+}
+
+body {
+    background-color: #f6f9fa;
+    padding-top: 100px;
+    margin: 0;
+}
+
+.main {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+.title{
+    font-size: 26px;
+    color: #333;
+}
+
+.video-player {
+    width: 880px;
+    height: 495px;
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.live-comment-body {
+    background-color: #fff;
+    width: 315px;
+    height: 495px;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;
+}
+
+.live-comment-tit {
+    padding: 10px 20px;
+    font-size: 12px;
+    color: #262626;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.live-comment-list {
+    margin: 0;
+    padding: 0 20px;
+    list-style: none;
+    height: 402px;
+    overflow-y: hidden;
+}
+
+.live-comment-list:hover {
+    overflow-y: scroll;
+}
+
+.live-comment-list li {
+    padding: 6px 0;
+    font-size: 12px;
+    /*display: inline-flex;*/
+    color: #555;
+
+}
+
+.live-comment-cont {
+    width: 188px;
+    text-align: left;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+
+.live-comment-time {
+    width: 88px;
+    text-align: left;
+}
+
+.live-comment-box {
+    height: 445px;
+}
+
+.write-live-comment {
+    width: 270px;
+    height: 50px;
+    background: linear-gradient(#f5f5f5, #fff);
+    box-sizing: border-box;
+    border: 1px solid #e2e2e2;
+    padding: 7px;
+    overflow-y: hidden;
+    line-height: 18px;
+    resize: none;
+    outline: medium;
+}
+
+.send-live-comment {
+    width: 45px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    background-color: #d81e06;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.main-actor{
+    width: 880px;
+}
+.actor-info{
+    position: relative;
+    display: inline-block;
+    padding-left: 70px;
+    height: 60px;
+
+}
+.actor-info img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.actor-name{
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 106px;
+    display: block;
+    line-height: 60px;
+}
+
+/*自定义滚动条*/
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .2);
+    background-color: #C1C1C1;
+}
+
+@media screen and (min-width: 1550px) {
+    .main {
+        width: 1500px;
+    }
+
+    .video-player {
+        width: 1180px;
+        height: 664px;
+    }
+
+    .live-comment-body {
+        height: 664px;
+    }
+
+    .live-comment-box {
+        height: 614px;
+    }
+    .live-comment-list{
+        height: 578px;
+    }
+    .main-actor{
+        width: 1180px;
+    }
+}
