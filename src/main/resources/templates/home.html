@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
     <meta name="applicabledevice" content="mobile">
 
-    <title th:text="${user.nickname}+'の首页'">首页</title>
+    <title>CBC微生活|首页</title>
     <link href="/css/all.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -42,9 +42,11 @@
     </div>
     <ul class="home-recommend-list">
         <li class="home-recommend-cont" th:each="movie,iterStat: ${movies}" th:if="${iterStat.index} < 6">
-            <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
-                 th:src="${movie.image}">
-            <p class="recommend-cont-tit" th:text="${movie.title}">电影1</p>
+            <a  th:href="@{/api/movie(u=${movie.value})}">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
+                     th:src="${movie.image}">
+                <p class="recommend-cont-tit" th:text="${movie.title}">电影1</p>
+            </a>
         </li>
     </ul>
 </div>

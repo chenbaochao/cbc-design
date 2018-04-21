@@ -133,6 +133,7 @@ public class SecurityConfig {
                     .antMatchers("/register*").permitAll()
                     .antMatchers("/user*").hasRole("USER")
                     .antMatchers("/api/register/**").permitAll()
+                    .antMatchers("/","/home").permitAll()
                     .anyRequest().authenticated()
                     // log in
                     .and().anonymous()
