@@ -167,4 +167,11 @@ public class PageController {
         return "video-play";
     }
 
+
+    @GetMapping("/search")
+    public String search(){
+        return "search";
+    }
+
+
 }

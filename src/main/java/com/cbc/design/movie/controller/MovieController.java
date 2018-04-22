@@ -23,7 +23,6 @@ public class MovieController {
         return "video-play";
     }
 
-
 }
 
 

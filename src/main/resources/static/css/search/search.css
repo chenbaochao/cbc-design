@@ -1,0 +1,146 @@
+body{
+    width: 100%;
+    margin: 0;
+}
+.margin-center{
+    width: 1200px;
+    margin: 0 auto;
+}
+.logo-name{
+
+}
+.search-head{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.search-box{
+    margin-left: 100px;
+    position: relative;
+    display: inline-block;
+}
+.search-input{
+    width: 680px;
+    height: 42px;
+    border: 2px solid #d81e06;
+    border-radius: 21px;
+    outline: none;
+    padding: 0 110px 0 20px;
+    color: #333;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.search-btn{
+    width: 110px;
+    height: 42px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0 21px 21px 0;
+    background-color: #d81e06;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 18px;
+    line-height: 42px;
+}
+.search-icon{
+    width: 20px;
+    transform: translateY(3px);
+    margin-right: 8px;
+}
+.search-keyword{
+    background-color: #f8f8f8;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    width: 100%;
+}
+.wrapper-main{
+    width: 800px;
+    float: left;
+    padding: 20px 0;
+}
+.search-item{
+    padding-left: 180px;
+    position: relative;
+    height: 224px;
+}
+.result-movie-pic{
+    width: 160px;
+    height: 224px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.result-movie-pic img{
+    width: 100%;
+    height: 100%;
+}
+.movie-name{
+    margin: 0;
+    font-size: 18px;
+    color: #d81e06;
+}
+.movie-info{
+    margin: 5px 0;
+    font-size: 14px;
+}
+.info-item{
+    width: 260px;
+    display: inline-block;
+}
+.play-video{
+    display: block;
+    width: 95px;
+    line-height: 32px;
+    background-color: #d81e06;
+    border-radius: 36px;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+}
+.play-icon{
+    width: 18px;
+    height: 18px;
+    transform: translateY(4px);
+    margin-right: 4px;
+}
+
+.wrapper-side{
+    width: 260px;
+    float: right;
+    padding: 20px 0;
+}
+.title-aside{
+    font-size: 18px;
+    color: #666;
+    margin: 0 0 7px 0;
+}
+.actor-info{
+    width: 31.3%;
+    display: inline-block;
+    margin-top: 8px;
+}
+.actor-info img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+.actor-name{
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 3px;
+
+}
