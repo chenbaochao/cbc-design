@@ -27,7 +27,8 @@ public class VideoParserManager implements ParserManager{
         String englishTitle = videoTitle.select(".alias").text();
         Elements mainInfo = document.select(".wrapper_main");
         String director = mainInfo.select(".director > a").first().text();
-        String allStar = mainInfo.select(".director").text().split("演员:")[1].trim();
+        int directorIndex = mainInfo.select(".director").text().indexOf(director);
+        String allStar = mainInfo.select(".director").text().substring(directorIndex+director.length());
         String introduction = mainInfo.select(".summary").text();
         Elements starsInfo = mainInfo.select(".item");
         List<Star> stars = starsInfo.stream().map(e ->
@@ -51,4 +52,14 @@ public class VideoParserManager implements ParserManager{
                     .build();
 
     }
+
+/*    public static void main(String[] args) {
+        Document document = JsoupUtil.getDocWithPC("https://v.qq.com/x/cover/rhiwaezl5iq2ys6.html");
+
+        Elements mainInfo = document.select(".wrapper_main");
+        String director = mainInfo.select(".director > a").first().text();
+        int allStar = mainInfo.select(".director").text().indexOf(director);
+        System.out.println();
+        System.out.println(mainInfo.select(".director").text().substring(allStar+director.length()).indexOf("嘉"));
+    }*/
 }
