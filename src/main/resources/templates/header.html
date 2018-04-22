@@ -35,11 +35,11 @@
                 </a>
             </li>
             <li style="float: right">
-                <a href="/userLogin"  class="nav-item">
+                <a href="/userLogin" th:unless="${#request.remoteUser}"  class="nav-item">
                     <img src="/image/login_user.png" class="header-icon"/>登录/注册
                 </a>
-                <a href=""  class="nav-item hide">
-                    <img src="/image/login_user.png" class="header-icon"/>您好，CBC！
+                <a href="/logout"  class="nav-item" th:if="${#request.remoteUser}">
+                    <img src="/image/login_user.png" class="header-icon" th:text="'您好,'+${#request.remoteUser}"/>
                 </a>
             </li>
             <li style="float: right;cursor: default">

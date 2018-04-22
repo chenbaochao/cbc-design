@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class VideoParserManager implements ParserManager{
+public class VideoParserManager implements ParserManager {
 
     private static final String baseUrl = "http://api.bbbbbb.me/svip/v.php?url=";
 
@@ -26,8 +26,13 @@ public class VideoParserManager implements ParserManager{
         String title = videoTitle.text().split(" ")[0];
         String englishTitle = videoTitle.select(".alias").text();
         Elements mainInfo = document.select(".wrapper_main");
-        String director = mainInfo.select(".director > a").first().text();
-        String allStar = mainInfo.select(".director").text().split("演员:")[1].trim();
+        String director = "";
+        String allStar = "";
+        if (!mainInfo.select(".director").isEmpty()) {
+            director = mainInfo.select(".director > a").first().text();
+            int directorIndex = mainInfo.select(".director").text().indexOf(director);
+            allStar = mainInfo.select(".director").text().substring(directorIndex + director.length());
+        }
         String introduction = mainInfo.select(".summary").text();
         Elements starsInfo = mainInfo.select(".item");
         List<Star> stars = starsInfo.stream().map(e ->
@@ -38,17 +43,27 @@ public class VideoParserManager implements ParserManager{
                         .build()
         ).collect(Collectors.toList());
         return Video
-                    .builder()
-                    .title(title)
-                    .englishTitle(englishTitle)
-                    .introduction(introduction)
-                    .image(image)
-                    .playUrl(baseUrl+url)
-                    .value(url)
-                    .allStar(allStar)
-                    .director(director)
-                    .stars(stars)
-                    .build();
+                .builder()
+                .title(title)
+                .englishTitle(englishTitle)
+                .introduction(introduction)
+                .image(image)
+                .playUrl(baseUrl + url)
+                .value(url)
+                .allStar(allStar)
+                .director(director)
+                .stars(stars)
+                .build();
 
     }
+
+/*    public static void main(String[] args) {
+        Document document = JsoupUtil.getDocWithPC("https://v.qq.com/x/cover/rhiwaezl5iq2ys6.html");
+
+        Elements mainInfo = document.select(".wrapper_main");
+        String director = mainInfo.select(".director > a").first().text();
+        int allStar = mainInfo.select(".director").text().indexOf(director);
+        System.out.println();
+        System.out.println(mainInfo.select(".director").text().substring(allStar+director.length()).indexOf("嘉"));
+    }*/
 }
