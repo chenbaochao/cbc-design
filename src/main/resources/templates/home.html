@@ -51,6 +51,54 @@
             </a>
         </li>
     </ul>
+    <div class="recommend-tit">
+        <img src="/image/movie-red.png">
+        <span class="recommend-name">电视剧</span>
+        <button class="refresh">
+            <img src="/image/refresh.png"/>换一批
+        </button>
+    </div>
+    <ul class="home-recommend-list">
+        <li class="home-recommend-cont" th:each="tv,iterStat: ${tvHots}" th:if="${iterStat.index} < 6">
+            <a  th:href="@{/movie(url=${tv.value})}">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
+                     th:src="${tv.image}">
+                <p class="recommend-cont-tit" th:text="${tv.title}">电影1</p>
+            </a>
+        </li>
+    </ul>
+    <div class="recommend-tit">
+        <img src="/image/movie-red.png">
+        <span class="recommend-name">综艺节目</span>
+        <button class="refresh">
+            <img src="/image/refresh.png"/>换一批
+        </button>
+    </div>
+    <ul class="home-recommend-list">
+        <li class="home-recommend-cont" th:each="recommend,iterStat: ${recommends}" th:if="${iterStat.index} < 6">
+            <a  th:href="@{/movie(url=${recommend.value})}">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
+                     th:src="${recommend.image}">
+                <p class="recommend-cont-tit" th:text="${recommend.title}">电影1</p>
+            </a>
+        </li>
+    </ul>
+    <div class="recommend-tit">
+        <img src="/image/movie-red.png">
+        <span class="recommend-name">卡通节目</span>
+        <button class="refresh">
+            <img src="/image/refresh.png"/>换一批
+        </button>
+    </div>
+    <ul class="home-recommend-list">
+        <li class="home-recommend-cont" th:each="carToon,iterStat: ${carToons}" th:if="${iterStat.index} < 6">
+            <a  th:href="@{/movie(url=${carToon.value})}">
+                <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
+                     th:src="${carToon.image}">
+                <p class="recommend-cont-tit" th:text="${carToon.title}">电影1</p>
+            </a>
+        </li>
+    </ul>
 </div>
 <footer>
     <div>
@@ -60,7 +108,7 @@
 <script>
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: true,//可选选项，自动滑动
-        // loop: true,
+        loop: true,
         clickable: true,
         pagination: {
             el: '.swiper-pagination'

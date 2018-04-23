@@ -37,13 +37,16 @@ public class TencentCrawler {
     @Scheduled(fixedRate = 60 * 60 * 1000)
     public void start(){
         Document pcDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PC);
-        Document phoneTVDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_TV);
-        Document phoneMovieDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_MOVIE);
-        Document phoneZongyiDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_RECOMMEND);
+        Document tvDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_TV);
+        Document movieDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_MOVIE);
+        Document zongyiDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_RECOMMEND);
+        Document carToonDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_CARTOON);
+
         saveCarouselsToRedis(pcDocument);
-        saveRecommendsToRedis(phoneZongyiDocument);
-        saveTVsToRedis(phoneTVDocument);
-        saveMoviesToRedis(phoneMovieDocument);
+        saveRecommendsToRedis(zongyiDocument);
+        saveTVsToRedis(tvDocument);
+        saveMoviesToRedis(movieDocument);
+        saveCartoonsToRedis(carToonDocument);
     }
 
 
@@ -91,6 +94,13 @@ public class TencentCrawler {
         redisSourceManager.saveVideos(key, getVideosFromPhoneDocument(document));
     }
 
+    /**
+     * 爬腾讯PC站-动漫
+     */
+    private void saveCartoonsToRedis(Document document) {
+        String key = redisSourceManager.VIDEO_PREFIX_HOME_CARTOON_KEY + "_" + TAG;
+        redisSourceManager.saveVideos(key, getVideosFromPhoneDocument(document));
+    }
 
 
     private List<Video> getVideosFromPhoneDocument(Document document) {

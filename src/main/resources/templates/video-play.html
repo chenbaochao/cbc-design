@@ -17,7 +17,13 @@
 <header th:include="header :: copy"></header>
 
 <div class="main">
-    <p class="title">小萝莉的神猴大叔
+    <p class="title" th:text="${video.title}">小萝莉的神猴大叔
+        <!--<span class="video-score">-->
+        <!--<span class="video-score01">8.</span>-->
+        <!--<span class="video-score02">2</span>-->
+        <!--</span>-->
+    </p>
+    <p class="title" th:text="${video.introduction}">小萝莉的神猴大叔
         <!--<span class="video-score">-->
         <!--<span class="video-score01">8.</span>-->
         <!--<span class="video-score02">2</span>-->
@@ -27,7 +33,7 @@
         <div class="video-player">
             <!--<div class="tanmu">gfdgfsx</div>-->
             <!--<iframe src="http://api.bbbbbb.me/svip/v.php?url=https://v.qq.com/x/cover/pi3eo11a5faz9oe.html" class="video" ></iframe>-->
-            <iframe src="http://api.bbbbbb.me/svip/v.php?url=https://v.qq.com/x/cover/pi3eo11a5faz9oe.html"
+            <iframe src=""
                     class="video-frame"
                     frameborder="0"
                     width="100%"
@@ -121,21 +127,21 @@
             </div>
         </div>
     </div>
-    <div class="">
-        <p class="title">《小萝莉的神猴大叔》主演</p>
+    <div class=""  th:if="${!video.stars.isEmpty()}">
+        <p class="title" th:text="'《'+${video.name}+'》'+' 主演'">《小萝莉的神猴大叔》主演</p>
         <div class="main-actor">
-            <div class="actor-info">
+            <div class="actor-info" th:each="star,indexStat:${video.stars}" th:if="${indexStat.index} < 4">
+                <img src="/image/actor.jpg" th:src="${star.starImage}">
+                <span class="actor-name" th:text="${star.starName}">主演1</span>
+            </div>
+<!--            <div class="actor-info">
                 <img src="/image/actor.jpg">
                 <span class="actor-name">主演1</span>
             </div>
             <div class="actor-info">
                 <img src="/image/actor.jpg">
                 <span class="actor-name">主演1</span>
-            </div>
-            <div class="actor-info">
-                <img src="/image/actor.jpg">
-                <span class="actor-name">主演1</span>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

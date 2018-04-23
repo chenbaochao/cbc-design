@@ -30,7 +30,7 @@ public class Video {
 
     private String playUrl;
 
-    private String englishTitle;
+    private String name;
 
     private String introduction;
 

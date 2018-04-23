@@ -23,8 +23,11 @@ public class VideoParserManager implements ParserManager {
         Document document = JsoupUtil.getDocWithPC(url);
         Elements videoTitle = document.select(".video_title");
         String image = document.select(".mod_figure_list_sm img").first().attr("r-lazyload");
-        String title = videoTitle.text().split(" ")[0];
+        String title = videoTitle.text();
+        String name = document.select(".player_title a").text();
+/*
         String englishTitle = videoTitle.select(".alias").text();
+*/
         Elements mainInfo = document.select(".wrapper_main");
         String director = "";
         String allStar = "";
@@ -45,7 +48,7 @@ public class VideoParserManager implements ParserManager {
         return Video
                 .builder()
                 .title(title)
-                .englishTitle(englishTitle)
+                .name(name)
                 .introduction(introduction)
                 .image(image)
                 .playUrl(baseUrl + url)
