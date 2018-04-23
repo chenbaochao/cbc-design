@@ -156,7 +156,7 @@ public class SecurityConfig {
                             StringBuilder sb = new StringBuilder();
                             sb.append("{\"code\":\"401\",\"msg\":\"");
                             if(e instanceof UsernameNotFoundException || e instanceof BadCredentialsException){
-                                sb.append("用户名或密码输入错误,登陆失败！");
+                                sb.append(e.getMessage());
                             }else{
                                 sb.append("登陆失败！");
                             }
