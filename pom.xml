@@ -67,6 +67,11 @@
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
         <!--百度api-->
         <dependency>
             <groupId>com.baidu.aip</groupId>
