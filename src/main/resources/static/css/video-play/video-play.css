@@ -2,14 +2,6 @@
     position: relative;
 }
 
-.tanmu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #fff;
-    z-index: 9;
-}
-
 body {
     background-color: #f6f9fa;
     padding-top: 100px;
@@ -21,8 +13,19 @@ body {
     margin: 0 auto;
     position: relative;
 }
-.title{
+
+.video-main {
+    position: relative;
+    margin: 22px 0;
+}
+
+.title {
     font-size: 26px;
+    color: #333;
+}
+
+.title02 {
+    font-size: 21px;
     color: #333;
 }
 
@@ -32,6 +35,43 @@ body {
     position: relative;
     box-sizing: border-box;
     display: inline-block;
+}
+
+/*视频弹幕*/
+/*.danmu-onvideo{*/
+/*position: absolute;*/
+/*top: 0;*/
+/*left: 0;*/
+/*width: 880px;*/
+/*height: 440px;*/
+/*}*/
+/*.danmu{*/
+/*color: rgba(255,255,255,.7);*/
+/*font-size: 16px;*/
+/*padding: 0 10px;*/
+/*text-align: center;*/
+/*animation:toleft 5.5s  linear;*/
+/*display: inline-block;*/
+/*position: absolute;*/
+/*left: 880px;*/
+/*right: 880px;*/
+/*}*/
+
+.danmu-onvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 880px;
+    height: 440px;
+}
+
+@keyframes toleft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-1000px);
+    }
 }
 
 .live-comment-body {
@@ -70,11 +110,10 @@ body {
     font-size: 12px;
     /*display: inline-flex;*/
     color: #555;
-
 }
 
 .live-comment-cont {
-    width: 188px;
+    width: 165px;
     text-align: left;
     display: inline-block;
     overflow: hidden;
@@ -90,6 +129,12 @@ body {
 
 .live-comment-box {
     height: 445px;
+}
+
+.user-head {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
 }
 
 .write-live-comment {
@@ -115,17 +160,47 @@ body {
     border: none;
     cursor: pointer;
 }
-.main-actor{
+
+.episode-wrapper {
+    width: 880px;
+    /*background-color: #fff;*/
+    /*border: 1px solid #e2e2e2;*/
+}
+
+.all-episodes {
+    font-size: 14px;
+    color: #666;
+    margin-left: 10px;
+}
+
+.episode {
+    display: inline-block;
+    width: 5%;
+    padding: 5px 0;
+    text-align: center;
+    color: #666;
+}
+
+.episode:hover {
+    background-color: #d81e06;
+    color: #fff;
+    outline: 1px solid #e2e2e2;
+
+}
+
+.main-actor {
     width: 880px;
 }
-.actor-info{
+
+.actor-info {
     position: relative;
     display: inline-block;
     padding-left: 70px;
     height: 60px;
 
 }
-.actor-info img{
+
+.actor-info img {
     position: absolute;
     top: 0;
     left: 0;
@@ -134,7 +209,8 @@ body {
     border-radius: 50%;
     margin-right: 8px;
 }
-.actor-name{
+
+.actor-name {
     font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -182,10 +258,12 @@ body {
     .live-comment-box {
         height: 614px;
     }
-    .live-comment-list{
+
+    .live-comment-list {
         height: 578px;
     }
-    .main-actor{
+
+    .main-actor {
         width: 1180px;
     }
 }
