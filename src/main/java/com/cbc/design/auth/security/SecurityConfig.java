@@ -26,6 +26,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -155,13 +156,15 @@ public class SecurityConfig {
                             PrintWriter out = resp.getWriter();
                             StringBuilder sb = new StringBuilder();
                             sb.append("{\"code\":\"401\",\"msg\":\"");
-                            if(e instanceof UsernameNotFoundException || e instanceof BadCredentialsException){
+                            if(e instanceof UsernameNotFoundException){
                                 sb.append(e.getMessage());
-                            }else{
+                            }else if(e instanceof  BadCredentialsException){
+                                sb.append("您输入的密码有误，请重新输入！");
+                            } else{
                                 sb.append("登陆失败！");
                             }
                             sb.append("\"}");
-                            out.write(sb.toString());
+                            out.print(sb.toString());
                             out.flush();
                             out.close();
                     })

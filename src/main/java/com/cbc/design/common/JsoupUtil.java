@@ -3,7 +3,6 @@ package com.cbc.design.common;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import sun.plugin2.os.windows.Windows;
 
 import java.io.IOException;
 

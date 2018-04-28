@@ -7,21 +7,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
     <meta name="applicabledevice" content="mobile">
-    <!--<link rel="stylesheet" href="/css/home/home.css"/>-->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/css/video-play/video-play.css" rel="stylesheet"/>
-    <script src="/js/jquery-3.0.0.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+<!--
     <script src="/js/danmu/danmu.js"></script>
+-->
+    <style>
+        .chip {
+            display: inline-block;
+            height: 32px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(0,0,0,.6);
+            line-height: 32px;
+            padding: 0 12px;
+            border-radius: 16px;
+            background-color: #eceff1;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+            animation: message 8s linear;
+            position: absolute;
+            top: 70px;
+            z-index: 99;
+            opacity: 0.7;
+        }
+        .chip img {
+            float: left;
+            margin: 0 8px 0 -12px;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+        }
+        .chip.chip-md {
+            height: 42px;
+            line-height: 42px;
+            border-radius: 21px;
+        }
+        .chip.chip-md img {
+            height: 42px;
+            width: 42px;
+        }
+        .chip.chip-md .close {
+            height: 42px;
+            line-height: 42px;
+            border-radius: 21px;
+        }
+
+        .chip.chip-lg {
+            height: 52px;
+            line-height: 52px;
+            border-radius: 26px;
+        }
+        .chip.chip-lg img {
+            height: 52px;
+            width: 52px;
+        }
+        .chip.chip-lg .close {
+            height: 52px;
+            line-height: 52px;
+            border-radius: 26px;
+        }
+        @keyframes message
+        {
+            from {
+                right: 0;
+            }
+            to {
+                right: 80%;
+            }
+        }
+    </style>
+
 </head>
 <body>
 <header th:include="header :: copy"></header>
 
-<div class="main">
+<div class="main" id="app">
     <h2 class="title" th:text="${video.title}"></h2>
     <p>导演:<span th:text="${video.director}"></span><span th:text="${video.allStar}"></span></p>
     <p>内容简介：<span th:text="${video.introduction}"></span></p>
-    <div class="video-main">
+    <div class="video-main" id="video-main">
         <div class="video-player">
             <iframe src=""
                     class="video-frame"
@@ -34,10 +101,10 @@
                     mozallowfullscreen="true"
                     th:src="${video.playUrl}"></iframe>
         </div>
-        <!--视频弹幕-->
+<!--        &lt;!&ndash;视频弹幕&ndash;&gt;
         <canvas class="danmu-onvideo" id="danmu-onvideo">
-            <!--<span class="danmu">danmu1</span>-->
-        </canvas>
+            &lt;!&ndash;<span class="danmu">danmu1</span>&ndash;&gt;
+        </canvas>-->
         <!--弹幕评论区-->
         <div class="live-comment-body">
             <div class="live-comment-box">
@@ -54,9 +121,9 @@
                 </ul>
             </div>
             <div>
-                <textarea type="text" class="write-live-comment" placeholder="您可以在这里输入弹幕吐槽哦~" maxlength="31"></textarea>
-                <button class="send-live-comment">发送</button>
-        </div>
+                <textarea type="text" class="write-live-comment" placeholder="您可以在这里输入弹幕吐槽哦~" maxlength="31"  v-model="content"></textarea>
+                <button class="send-live-comment"  @click="sendMessage">发送</button>
+            </div>
         </div>
     </div>
     <div class="episode-wrapper">
@@ -82,8 +149,36 @@
         </div>
     </div>
 </div>
+<!-- Navigation & Intro -->
+
+<!-- JQuery -->
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+<script>
+
+    String.prototype.format = function() {
+        if(arguments.length === 0) return this;
+        var param = arguments[0];
+        var s = this;
+        if(typeof(param) === 'object') {
+            for(var key in param)
+                s = s.replace(new RegExp("\\{" + key + "\\}", "g"), param[key]);
+            return s;
+        } else {
+            for(var i = 0; i < arguments.length; i++)
+                s = s.replace(new RegExp("\\{" + i + "\\}", "g"), arguments[i]);
+            return s;
+        }
+    }
+
+</script>
 <script th:inline="javascript">
-    var user = [[${user}]];
+/*    var user = [[${user}]];
     console.log(user.avatar);
     $('.send-live-comment').click(function(){
             var val=$('.write-live-comment').val();
@@ -97,105 +192,72 @@
             // $content.animate({right:$(document.body).width()+100},8000,function(){
             //     $(this).remove();
             // });
+    });*/
+
+
+
+    // stomp 客户端
+    var stompClient = null;
+
+    var url = [[${param.url[0]}]];
+    var id =encodeURIComponent(url);
+    /**
+     *  建立 websocket 连接
+     */
+    function connect(){
+       var socket =  new SockJS("/cbc");
+       stompClient = Stomp.over(socket);
+       stompClient.connect({},function (frame){
+           //监听弹幕信息
+           stompClient.subscribe('/topic/video/'+id,function (response) {
+               var data = JSON.parse(response.body);
+               var message = {
+                   style: "top: " + (Math.random() * 300) + "px",
+                   avatar : data.avatar,
+                   content: data.content,
+                   id: "msg" + app.id
+               };
+               app.id++;
+
+               var node = '<div class="chip chip-md orange darken-2 white-text selected" id="{id}" style="{style}"><img src="{avatar}"> {content}</div>'.format(message);
+               var element = $(node);
+               $("#video-main").prepend(element);
+               console.log(document.getElementById(message.id));
+               document.getElementById(message.id).addEventListener("webkitAnimationEnd", function(){
+                   $("#" + message.id).remove();
+               });
+           })
+       })
+    }
+
+
+
+    /**
+     * 初始化信息
+     */
+    $(function () {
+        connect();
     });
 
-    // (function ($) {
-    //     function Barrager(dom) {
-    //         this.canvas = dom.get(0);
-    //         this.ctx = this.canvas.getContext("2d");
-    //         this.msgs = new Array(300);
-    //         this.font = "14px 黑体";
-    //         this.width = 1280;
-    //         this.height = 720;
-    //         this.ctx.font = "14px 黑体";
-    //         this.colorArr = ["Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue"];
-    //         this.interval = "";
-    //         this.draw = function () {
-    //             if (this.interval != "") return;
-    //             var _this = this;
-    //             this.interval = setInterval(function () {
-    //                 _this.ctx.clearRect(0, 0, 1280, 720);
-    //                 _this.ctx.save();
-    //                 for (var i = 0; i < _this.msgs.length; i++) {
-    //                     if (!(_this.msgs[i] == null || _this.msgs[i] == "" || typeof(_this.msgs[i]) == "undefined")) {
-    //                         if (_this.msgs[i].L == null || typeof(_this.msgs[i].L) == "undefined") {
-    //                             _this.msgs[i].L = _this.width;
-    //                             _this.msgs[i].T = parseInt(Math.random() * 700);
-    //                             _this.msgs[i].S = parseInt(Math.random() * (10 - 4) + 4);
-    //                             _this.msgs[i].C = _this.colorArr[Math.floor(Math.random() * _this.colorArr.length)];
-    //                         } else {
-    //                             if (_this.msgs[i].L < -200) {
-    //                                 _this.msgs[i] = null;
-    //                             } else {
-    //                                 _this.msgs[i].L = parseInt(_this.msgs[i].L - _this.msgs[i].S);
-    //                                 _this.ctx.fillStyle = _this.msgs[i].C;
-    //                                 _this.ctx.fillText(_this.msgs[i].msg, _this.msgs[i].L, _this.msgs[i].T);
-    //                                 _this.ctx.restore();
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //             }, 20);
-    //         };
-    //         //添加数据，数据格式[{"msg":"nihao"}]
-    //         this.putMsg = function (datas) {
-    //             for (var j = 0; j < datas.length; j++) {
-    //                 for (var i = 0; i < this.msgs.length; i++) {
-    //                     if (this.msgs[i] == null || this.msgs[i] == "" || typeof(this.msgs[i]) == "undefined") {
-    //                         this.msgs[i] = datas[j];
-    //                         break;
-    //                     }
-    //                 }
-    //             }
-    //             this.draw();
-    //         };
-    //         this.clear = function () {
-    //             clearInterval(this.interval);
-    //             this.interval = "";
-    //             this.ctx.clearRect(0, 0, this.width, this.height);
-    //             this.ctx.save();
-    //             for (var i = 0; i < this.msgs.length; i++) {
-    //                 this.msgs[i] = null;
-    //             }
-    //         };
-    //     }
-    //
-    //     $.fn.barrager = function (para) {
-    //         if (typeof(para) == "string") {
-    //             try {
-    //                 var api = $(this).data('barrager_api');
-    //                 api[para].apply(api);
-    //             } catch (e) {
-    //             }
-    //         } else if (typeof para == 'object' || !para) {
-    //             $this = $(this);
-    //             if ($this.data('barrager_api') != null && $this.data('barrager_api') != '') {
-    //                 var api = $this.data('barrager_api');
-    //                 api.putMsg(para);
-    //             } else {
-    //                 var api = new Barrager($this);
-    //                 $this.data('barrager_api', api);
-    //                 api.putMsg(para);
-    //             }
-    //         } else {
-    //             $.error('Method ' + method + ' does not exist on jQuery.slidizle');
-    //         }
-    //         return this;
-    //     }
-    // })(jQuery);
-    // $(function(){
-    //     $('canvas').barrager([{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"这是我发的。。。"},{"msg":"这个插件真不错"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"}]);
-    //     $('#qc').click(function(){
-    //         $('canvas').barrager("clear");
-    //     });
-    //     $('#tj').click(function(){
-    //         $('canvas').barrager([{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"这是我发的。。。"},{"msg":"这个插件真不错"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"}]);
-    //     });
-    //     setInterval(function(){
-    //         $('canvas').barrager([{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"看着不错。。。。"},{"msg":"哈哈哈。。。。"},{"msg":"不错不错。。"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"},{"msg":"nihao"}]);
-    //     },2000);
-    // })
-
+    var app = new Vue({
+        el: '#app',
+        data: {
+            id: 0,
+            user: [[${user}]],
+            content: null,
+            messages: []         // 弹幕信息
+        },
+        methods: {
+            // 发送弹幕
+            sendMessage: function () {
+                if (app.content == null || app.content.trim().length === 0){
+                    return;
+                };
+                stompClient.send("/app/video/"+id, {}, app.content);
+                app.content = null;
+            }
+        }
+    })
 </script>
 </body>
 </html>

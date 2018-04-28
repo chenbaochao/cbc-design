@@ -165,11 +165,6 @@ public class PageController {
     }
 
 
-    @GetMapping("/search")
-    public String search(){
-        return "search";
-    }
-
     @GetMapping("/home02")
     public String home02(@AuthenticationPrincipal User user,Model model,Pageable pageable){
         Long userId = user.getId();

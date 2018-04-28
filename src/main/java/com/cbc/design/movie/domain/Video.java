@@ -39,4 +39,8 @@ public class Video {
     private String director;
 
     private String allStar;
+
+    private String totalEpisode;
+
+    private List<Episode> episodes;
 }

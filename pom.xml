@@ -122,6 +122,10 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-messaging</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -132,10 +136,14 @@
                 <configuration>
                     <!-- 如果没有该项配置，devtools不会起作用，即应用不会restart -->
                     <fork>true</fork>
+                    <!--支持静态资源热部署-->
+                    <addResources>true</addResources>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+
 
 
 </project>

@@ -5,6 +5,7 @@ spring:
   redis:
     host: localhost
     port: 6379
+    database: 1
   session:
     store-type: redis   #集群坏境下session共享
 
@@ -33,8 +34,8 @@ logging:
   level:
     root: info
     com.cbc.design: debug
-#    org.springframework.security: debug
-#    org.springframework.security.web.access.intercept: debug
+    org.springframework.security: debug
+    org.springframework.security.web.access.intercept: debug
 
 security:
   propreties:

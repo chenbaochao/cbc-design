@@ -17,10 +17,10 @@ public class WebsocketConfig extends AbstractSessionWebSocketMessageBrokerConfig
      */
     @Override
     protected void configureStompEndpoints(StompEndpointRegistry registry) {
-        //允许使用socketJs方式访问，访问点为webSocketServer,允许跨域
+        //允许使用socketJs方式访问，访问点为cbc,允许跨域
         //在网页上我们可以通过这个链接 http://localhost/webSocketServer
         //来和服务器的websocket连接
-        registry.addEndpoint("/webSocketServer").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/cbc").setAllowedOrigins("*").withSockJS();
     }
 
     /**
