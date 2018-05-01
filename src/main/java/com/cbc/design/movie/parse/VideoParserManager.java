@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class VideoParserManager implements ParserManager {
 
-    private static final String baseUrl = "http://api.bbbbbb.me/svip/v.php?url=";
+    private static final String baseUrl = "http://api.bbbbbb.me/svip/v.php/?url=";
 
     private static final String tencentUrl = "http://v.qq.com";
 
