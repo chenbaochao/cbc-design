@@ -9,7 +9,9 @@ import com.cbc.design.common.RepeatSubmit;
 import com.cbc.design.common.TokenProcessor;
 import com.cbc.design.movie.domain.Video;
 import com.cbc.design.movie.redis.RedisSourceManager;
+import com.cbc.design.movie.service.SearchService;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,8 @@ public class PageController {
     private final RedisSourceManager redisSourceManager;
 
     private final static String[] TAGS = {"QQ"};
+
+    private final SearchService searchService;
 
     /**
      *  第一步注册
@@ -190,6 +194,7 @@ public class PageController {
 
         return "home02";
     }
+
 
 
 }

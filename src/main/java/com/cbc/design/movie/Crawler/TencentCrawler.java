@@ -1,4 +1,4 @@
-package com.cbc.design.movie.Crawler;
+package com.cbc.design.movie.crawler;
 
 import com.cbc.design.common.JsoupUtil;
 import com.cbc.design.movie.domain.Video;

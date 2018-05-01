@@ -43,4 +43,6 @@ public class Video {
     private String totalEpisode;
 
     private List<Episode> episodes;
+
+    private String englishTitle;
 }

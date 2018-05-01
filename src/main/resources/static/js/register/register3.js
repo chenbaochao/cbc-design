@@ -63,7 +63,7 @@ function check() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/api/register/save"+"?token="+token ,
+            url: "/api/register/save"+"?token="+encodeURIComponent(token) ,
             dataType: "json",
             data: JSON.stringify({
                 username: name,
