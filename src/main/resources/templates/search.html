@@ -12,54 +12,62 @@
 </head>
 <body>
 <div class="search-head">
-    <span class="logo-name">CBC微生活</span>
+    <span class="logo-name">CBC微生活|搜索</span>
     <div class="search-box">
-        <input class="search-input">
+        <input class="search-input" th:value="${#request.getParameter('keyword')}">
         <button class="search-btn">
             <img src="image/search-white.png" class="search-icon">搜索
         </button>
     </div>
 </div>
 <div class="search-keyword">
+<!--
     <p class="margin-center" th:text="${#request.getParameter('keyword')}"></p>
+-->
 </div>
 <div class="margin-center">
     <div class="wrapper-main">
-        <div class="search-item" th:each="video,index:${videos}">
+        <div class="search-item" th:each="video,iterStat:${videos}">
             <div>
-                <a class="result-movie-pic">
-                    <img src="image/example-movie.jpg">
+                <a class="result-movie-pic" th:if="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.value})}">
+                    <img src="image/example-movie.jpg" th:src="${video.image}">
+                </a>
+                <a class="result-movie-pic" th:unless="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.episodes.get(0).url})}">
+                    <img src="image/example-movie.jpg" th:src="${video.image}">
                 </a>
             </div>
             <h2 class="movie-name">
-                <a></a>
+                <a th:text="${video.title}" th:if="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.value})}"></a>
+                <a th:text="${video.title}" th:unless="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.episodes.get(0).url})}"></a>
             </h2>
             <div class="movie-info-list">
                 <div class="movie-info">
-                    <div class="info-item">
+        <!--            <div class="info-item">
                         <span class="label">英文名：</span>
                         <span></span>
-                    </div>
+                    </div>-->
                     <div class="info-item">
-                        <span class="label">导演：</span>
+                        <span class="label" th:text="'导演：'+${video.director}">导演：</span>
                         <span></span>
                     </div>
                 </div>
                 <div class="movie-info">
-                    <span class="label">主演：</span>
-                    <span>ds</span>
+                    <span class="label" th:text="'主演：'+ ${video.allStar}"></span>
                 </div>
                 <div class="movie-info">
-                    <span class="label">简介：</span>
-                    <span>ds</span>
+                    <span class="label" th:text="'简介：'+${video.introduction}">简介：</span>
                 </div>
             </div>
-            <a class="play-video">
+            <a class="play-video" th:href="@{/movie(url=${video.value})}">
                 <img src="image/play.png" class="play-icon">
                 <span>观看</span>
             </a>
 
         </div>
+        <div class="search-item" th:if="${videos.isEmpty()}">
+            未找到[[${#request.getParameter('keyword')}]]的记录!
+        </div>
+
     </div>
     <div class="wrapper-side">
         <div class="main-actor">
@@ -89,11 +97,15 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script th:inline="javascript">
 
-    var keyword = $(".search-input").input();
-
     $(".search-btn").click(function () {
-        
+        var keyword = $(".search-input").val();
+        window.location.href ="/search?keyword="+keyword;
     })
 
+    $("body").keydown(function() {
+         if (event.keyCode == "13") {//keyCode=13是回车键
+             $('.search-btn').click();
+         }
+     });
 </script>
 </html>

@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
+
 </head>
 <header th:fragment="copy">
     <link rel="stylesheet" href="/css/header.css"/>
 <!--
     <script src="/js/header.js"></script>
 -->
+    <script th:inline="javascript">
+
+        function search() {
+            var keyword = $(".search-input").val();
+            window.location.href ="/search?keyword="+keyword;
+        }
+
+           $("body").keydown(function() {
+               if (event.keyCode == "13") {//keyCode=13是回车键
+                   $('.enter-search').click();
+               }
+           });
+
+    </script>
     <div class="header-wrapper">
         <ul class="header-nav">
             <li>
@@ -47,11 +63,12 @@
             <li style="float: right;cursor: default">
                 <div class="header-search">
                     <input type="text" class="search-input" placeholder="搜索">
-                    <img src="image/search.png" class="enter-search">
+                    <img src="image/search.png" class="enter-search" th:onclick="'javascript:search();'">
                 </div>
             </li>
         </ul>
     </div>
 
 </header>
+
 </html>

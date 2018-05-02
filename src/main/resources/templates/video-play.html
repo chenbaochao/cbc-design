@@ -11,6 +11,8 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <!--
     <script src="/js/danmu/danmu.js"></script>
 -->
@@ -105,7 +107,6 @@
         <canvas class="danmu-onvideo" id="danmu-onvideo">
             &lt;!&ndash;<span class="danmu">danmu1</span>&ndash;&gt;
         </canvas>-->
-        <!--<div class="danmu-onvideo"></div>-->
         <!--弹幕评论区-->
         <div class="live-comment-body">
             <div class="live-comment-box">
@@ -115,8 +116,8 @@
                 </div>
                 <ul class="live-comment-list">
                     <li>
-                        <!--<span><</span>-->
-                        <span class="live-comment-cont"><img class="user-head" src="/image/actor.jpg">第一条弹幕第第一条第一条弹幕第第一条第一条弹幕第第一条</span>
+                        <span><img class="user-head" src="/image/actor.jpg"></span>
+                        <span class="live-comment-cont">第一条弹幕第第一条第一条弹幕第第一条第一条弹幕第第一条</span>
                         <span class="live-comment-time">04-21&nbsp;14:46</span>
                     </li>
                 </ul>
@@ -127,17 +128,12 @@
             </div>
         </div>
     </div>
-    <div class="episode-wrapper">
-        <h3 class="title02">选集<span class="all-episodes">全xx集</span></h3>
+    <div class="episode-wrapper" th:if="${video.episodes}">
+        <h3 class="title02">选集<span class="all-episodes">[[${video.totalEpisode}]]</span></h3>
         <div class="episode-main">
-            <span class="episode">d</span>
-            <span class="episode">d</span>
-            <span class="episode">d</span>
-            <span class="episode">d</span>
-            <span class="episode">d</span>
-            <span class="episode">d</span>
-            <span class="episode">d</span>
-            <span class="episode">d</span>
+            <span class="episode" th:each="episode:${video.episodes}">
+                <a th:text="${episode.number}" th:href="@{/movie(url=${episode.url})}"/>
+            </span>
         </div>
     </div>
     <div th:if="${!video.stars.isEmpty()}">
@@ -152,8 +148,7 @@
 </div>
 <!-- Navigation & Intro -->
 
-<!-- JQuery -->
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
 <!-- Bootstrap core JavaScript -->
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
@@ -162,12 +157,6 @@
 <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
 <script>
 
-    $('.danmu-onvideo').mouseover(function(){
-        $(".dplayer-controller,.dplayer-controller-mask").css({
-            "opacity":"1",
-            "transform":"translateY(100%)",
-            "-webkit-transform":"translateY(100%)"})
-    });
     String.prototype.format = function() {
         if(arguments.length === 0) return this;
         var param = arguments[0];
@@ -226,10 +215,12 @@
                };
                app.id++;
 
-               var node = '<div class="chip chip-md orange darken-2 white-text selected" id="{id}" style="{style}"><img src="{avatar}"> {content}</div>'.format(message);
+               var node = '<div class="chip chip-md orange darken-2 white-text selected" id="{id}" style="{style}"><img src="{avatar}">{content}</div>'.format(message);
                var element = $(node);
-               $(".video-player").prepend(element);
-               console.log(document.getElementById(message.id));
+               $("#video-main").prepend(element);
+               var danmu = ('<li><span><img class="user-head" src="{avatar}"></span><span class="live-comment-cont">{content}</span><span class="live-comment-time">'+new Date().toLocaleTimeString()+'</span></li>').format(message);
+               var el = $(danmu);
+               $(".live-comment-list").prepend(el);
                document.getElementById(message.id).addEventListener("webkitAnimationEnd", function(){
                    $("#" + message.id).remove();
                });
