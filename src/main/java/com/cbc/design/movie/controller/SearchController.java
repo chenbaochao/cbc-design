@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,12 +19,12 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping("/search")
-    public String search(@RequestParam(required = false) String keyword, Model model){
-
-        if(StringUtils.isNotBlank(keyword)) {
-            List<Video> videos = searchService.search(keyword);
-            model.addAttribute("videos", videos);
+    public String search(@RequestParam(required = false) String keyword, Model model) {
+        List<Video> videos = new ArrayList<>();
+        if (StringUtils.isNotBlank(keyword)) {
+            videos = searchService.search(keyword);
         }
+        model.addAttribute("videos", videos);
         return "search";
     }
 

@@ -13,21 +13,16 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/home/home.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
-    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<script src="/js/home/home.js"></script>
 <body>
 <header th:include="header :: copy"></header>
 <div class="swiper-container home-swiper">
     <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <img src="https://puui.qpic.cn/tv/0/22560718_1680580/0" class="pic">
-        </div>
-        <div class="swiper-slide">
-            <img src="https://img1.gtimg.com/v/pics/hv1/230/56/2271/147686285.jpg">
-        </div>
-        <div class="swiper-slide">
-            <img src="https://img1.gtimg.com/tv/pics/hv1/168/65/2264/147233343.jpg">
+        <div class="swiper-slide" th:each="movieCarousel:${movieCarousels}">
+            <a th:href="@{/play(url=${movieCarousel.value})}">
+                <img th:src="${movieCarousel.image}" class="pic">
+            </a>
         </div>
     </div>
     <div class="swiper-pagination"></div>

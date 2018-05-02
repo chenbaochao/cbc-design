@@ -163,11 +163,6 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping("/video")
-    public String video(){
-        return "video";
-    }
-
 
     @GetMapping("/home02")
     public String home02(@AuthenticationPrincipal User user,Model model,Pageable pageable){

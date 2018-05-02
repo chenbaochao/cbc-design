@@ -23,7 +23,7 @@
 <div class="swiper-container home-swiper">
     <div class="swiper-wrapper">
         <div class="swiper-slide" th:each="carouselPic: ${carouselPics}">
-            <a th:href="@{/movie(url=${carouselPic.value})}">
+            <a th:href="@{/play(url=${carouselPic.value})}">
                 <img src="https://puui.qpic.cn/tv/0/22560718_1680580/0" th:src="${carouselPic.image}" class="pic">
             </a>
         </div>
@@ -43,7 +43,7 @@
     </div>
     <ul class="home-recommend-list">
         <li class="home-recommend-cont" th:each="movie,iterStat: ${movies}" th:if="${iterStat.index} < 6">
-            <a  th:href="@{/movie(url=${movie.value})}">
+            <a  th:href="@{/play(url=${movie.value})}">
                 <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
                      th:src="${movie.image}">
                 <p class="recommend-cont-tit" th:text="${movie.title}">电影1</p>
@@ -59,7 +59,7 @@
     </div>
     <ul class="home-recommend-list">
         <li class="home-recommend-cont" th:each="tv,iterStat: ${tvHots}" th:if="${iterStat.index} < 6">
-            <a  th:href="@{/movie(url=${tv.value})}">
+            <a  th:href="@{/play(url=${tv.value})}">
                 <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
                      th:src="${tv.image}">
                 <p class="recommend-cont-tit" th:text="${tv.title}">电影1</p>
@@ -75,7 +75,7 @@
     </div>
     <ul class="home-recommend-list">
         <li class="home-recommend-cont" th:each="recommend,iterStat: ${recommends}" th:if="${iterStat.index} < 6">
-            <a  th:href="@{/movie(url=${recommend.value})}">
+            <a  th:href="@{/play(url=${recommend.value})}">
                 <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
                      th:src="${recommend.image}">
                 <p class="recommend-cont-tit" th:text="${recommend.title}">电影1</p>
@@ -91,7 +91,7 @@
     </div>
     <ul class="home-recommend-list">
         <li class="home-recommend-cont" th:each="carToon,iterStat: ${carToons}" th:if="${iterStat.index} < 6">
-            <a  th:href="@{/movie(url=${carToon.value})}">
+            <a  th:href="@{/play(url=${carToon.value})}">
                 <img src="http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/t/t2t7544bcr1pw8r_y.jpg"
                      th:src="${carToon.image}">
                 <p class="recommend-cont-tit" th:text="${carToon.title}">电影1</p>

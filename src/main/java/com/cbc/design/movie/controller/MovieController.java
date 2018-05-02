@@ -5,6 +5,7 @@ import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
 import com.cbc.design.movie.domain.Video;
 import com.cbc.design.movie.parse.ParserManager;
+import com.cbc.design.movie.redis.RedisSourceManager;
 import lombok.AllArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,10 +28,14 @@ public class MovieController {
 
     private final ParserManager parseManager;
 
+    private final RedisSourceManager redisSourceManager;
+
     private final UserRepository userRepository;
 
+    private final static String[] TAGS = {"QQ"};
 
-    @GetMapping("/movie")
+
+    @GetMapping("/play")
     public String play(@RequestParam String url, Model model, @AuthenticationPrincipal User user) {
         Video video = (Video) parseManager.parse(url);
         model.addAttribute("video", video);
@@ -45,6 +51,13 @@ public class MovieController {
         json.put("content", message);
         json.put("avatar",user.getAvatar());
         return json;
+    }
+
+    @GetMapping("/movie")
+    public String movie(Model model){
+        List<Video> movieCarousels = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_MOVIE_CAROUSEL_KEY, TAGS[0]);
+        model.addAttribute("movieCarousels",movieCarousels);
+        return "movie";
     }
 
 }

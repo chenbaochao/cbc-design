@@ -29,16 +29,16 @@
     <div class="wrapper-main">
         <div class="search-item" th:each="video,iterStat:${videos}">
             <div>
-                <a class="result-movie-pic" th:if="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.value})}">
+                <a class="result-movie-pic" th:if="${video.episodes.isEmpty()}" th:href="@{/play(url=${video.value})}">
                     <img src="image/example-movie.jpg" th:src="${video.image}">
                 </a>
-                <a class="result-movie-pic" th:unless="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.episodes.get(0).url})}">
+                <a class="result-movie-pic" th:unless="${video.episodes.isEmpty()}" th:href="@{/play(url=${video.episodes.get(0).url})}">
                     <img src="image/example-movie.jpg" th:src="${video.image}">
                 </a>
             </div>
             <h2 class="movie-name">
-                <a th:text="${video.title}" th:if="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.value})}"></a>
-                <a th:text="${video.title}" th:unless="${video.episodes.isEmpty()}" th:href="@{/movie(url=${video.episodes.get(0).url})}"></a>
+                <a th:text="${video.title}" th:if="${video.episodes.isEmpty()}" th:href="@{/play(url=${video.value})}"></a>
+                <a th:text="${video.title}" th:unless="${video.episodes.isEmpty()}" th:href="@{/play(url=${video.episodes.get(0).url})}"></a>
             </h2>
             <div class="movie-info-list">
                 <div class="movie-info">
@@ -58,7 +58,7 @@
                     <span class="label" th:text="'简介：'+${video.introduction}">简介：</span>
                 </div>
             </div>
-            <a class="play-video" th:href="@{/movie(url=${video.value})}">
+            <a class="play-video" th:href="@{/play(url=${video.value})}">
                 <img src="image/play.png" class="play-icon">
                 <span>观看</span>
             </a>

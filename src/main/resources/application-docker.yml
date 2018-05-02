@@ -20,8 +20,6 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
-  thymeleaf:
-    cache: false
   mail:
     host: smtp.qq.com
     port: 587
@@ -39,7 +37,7 @@ logging:
 security:
   propreties:
     rememberMeSeconds: 30
-#    isAutoCreateRememberTable: true  首次启动设为true
+    isAutoCreateRememberTable: true  首次启动设为true
 
 mail:
   fromMail:

@@ -29,12 +29,14 @@ public class TencentCrawler {
     private static final String HOME_PAGE_PHONE_RECOMMEND = "http://v.qq.com/x/list/variety";
     private static final String TAG = "QQ";
 
+    private static final String MOVIE_HOME_PAGE_PC = "https://v.qq.com/movie";
+
     private final RedisSourceManager redisSourceManager;
 
     /**
      *  每隔1小时， 爬腾讯视频官网信息
      */
-    @Scheduled(fixedRate = 60 * 60 * 1000)
+    @Scheduled(fixedRate = 12*60 * 60 * 1000)
     public void start(){
         Document pcDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PC);
         Document tvDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_TV);
@@ -42,11 +44,16 @@ public class TencentCrawler {
         Document zongyiDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_RECOMMEND);
         Document carToonDocument = JsoupUtil.getDocWithPC(HOME_PAGE_PHONE_CARTOON);
 
+        Document movieHomeDocument = JsoupUtil.getDocWithPC(MOVIE_HOME_PAGE_PC);
+
+
         saveCarouselsToRedis(pcDocument);
         saveRecommendsToRedis(zongyiDocument);
         saveTVsToRedis(tvDocument);
         saveMoviesToRedis(movieDocument);
         saveCartoonsToRedis(carToonDocument);
+
+        saveMovieCarouselsToRedis(movieHomeDocument);
     }
 
 
@@ -117,5 +124,27 @@ public class TencentCrawler {
             videos.add(video);
         }
         return videos;
+    }
+
+
+
+    /**
+     * 爬腾讯视频官网-电影轮播信息
+     */
+    private void saveMovieCarouselsToRedis(Document document) {
+        List<Video> carouselVideos = new ArrayList<>();
+        Elements carousels = document.select("div.slider_nav a");
+        for (Element carousel : carousels) {
+            Video video = new Video();
+            String title = carousel.select("div.txt").text();
+            String image = carousel.attr("data-bgimage");
+            String url = carousel.attr("href");
+            video.setValue(url);
+            video.setTitle(title);
+            video.setImage(image);
+            carouselVideos.add(video);
+        }
+        String key = redisSourceManager.VIDEO_PREFIX_MOVIE_CAROUSEL_KEY + "_" + TAG;
+        redisSourceManager.saveVideos(key, carouselVideos);
     }
 }

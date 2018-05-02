@@ -132,7 +132,7 @@
         <h3 class="title02">选集<span class="all-episodes">[[${video.totalEpisode}]]</span></h3>
         <div class="episode-main">
             <span class="episode" th:each="episode:${video.episodes}">
-                <a th:text="${episode.number}" th:href="@{/movie(url=${episode.url})}"/>
+                <a th:text="${episode.number}" th:href="@{/play(url=${episode.url})}"/>
             </span>
         </div>
     </div>
