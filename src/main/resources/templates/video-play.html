@@ -115,11 +115,11 @@
                     <span class="live-comment-time">发送时间</span>
                 </div>
                 <ul class="live-comment-list">
-                    <li>
+<!--                    <li>
                         <span><img class="user-head" src="/image/actor.jpg"></span>
                         <span class="live-comment-cont">第一条弹幕第第一条第一条弹幕第第一条第一条弹幕第第一条</span>
                         <span class="live-comment-time">04-21&nbsp;14:46</span>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
             <div>
@@ -217,7 +217,7 @@
 
                var node = '<div class="chip chip-md orange darken-2 white-text selected" id="{id}" style="{style}"><img src="{avatar}">{content}</div>'.format(message);
                var element = $(node);
-               $("#video-main").prepend(element);
+               $(".video-player").prepend(element);
                var danmu = ('<li><span><img class="user-head" src="{avatar}"></span><span class="live-comment-cont">{content}</span><span class="live-comment-time">'+new Date().toLocaleTimeString()+'</span></li>').format(message);
                var el = $(danmu);
                $(".live-comment-list").prepend(el);
