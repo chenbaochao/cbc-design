@@ -105,6 +105,7 @@
         <canvas class="danmu-onvideo" id="danmu-onvideo">
             &lt;!&ndash;<span class="danmu">danmu1</span>&ndash;&gt;
         </canvas>-->
+        <!--<div class="danmu-onvideo"></div>-->
         <!--弹幕评论区-->
         <div class="live-comment-body">
             <div class="live-comment-box">
@@ -114,8 +115,8 @@
                 </div>
                 <ul class="live-comment-list">
                     <li>
-                        <span><img class="user-head" src="/image/actor.jpg"></span>
-                        <span class="live-comment-cont">第一条弹幕第第一条第一条弹幕第第一条第一条弹幕第第一条</span>
+                        <!--<span><</span>-->
+                        <span class="live-comment-cont"><img class="user-head" src="/image/actor.jpg">第一条弹幕第第一条第一条弹幕第第一条第一条弹幕第第一条</span>
                         <span class="live-comment-time">04-21&nbsp;14:46</span>
                     </li>
                 </ul>
@@ -161,6 +162,12 @@
 <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
 <script>
 
+    $('.danmu-onvideo').mouseover(function(){
+        $(".dplayer-controller,.dplayer-controller-mask").css({
+            "opacity":"1",
+            "transform":"translateY(100%)",
+            "-webkit-transform":"translateY(100%)"})
+    });
     String.prototype.format = function() {
         if(arguments.length === 0) return this;
         var param = arguments[0];
@@ -221,7 +228,7 @@
 
                var node = '<div class="chip chip-md orange darken-2 white-text selected" id="{id}" style="{style}"><img src="{avatar}"> {content}</div>'.format(message);
                var element = $(node);
-               $("#video-main").prepend(element);
+               $(".video-player").prepend(element);
                console.log(document.getElementById(message.id));
                document.getElementById(message.id).addEventListener("webkitAnimationEnd", function(){
                    $("#" + message.id).remove();
