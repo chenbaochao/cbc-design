@@ -123,12 +123,12 @@
                 </ul>
             </div>
             <div>
-                <textarea type="text" class="write-live-comment" placeholder="您可以在这里输入弹幕吐槽哦~" maxlength="31"  v-model="content"></textarea>
+                <textarea type="text" class="write-live-comment" placeholder="您可以在这里输入弹幕吐槽哦~" maxlength="31"  v-model="content" @keyup.enter="sendMessage"></textarea>
                 <button class="send-live-comment"  @click="sendMessage">发送</button>
             </div>
         </div>
     </div>
-    <div class="episode-wrapper" th:if="${video.episodes}">
+    <div class="episode-wrapper" th:if="${!video.episodes.isEmpty()}">
         <h3 class="title02">选集<span class="all-episodes">[[${video.totalEpisode}]]</span></h3>
         <div class="episode-main">
             <span class="episode" th:each="episode:${video.episodes}">
@@ -256,6 +256,10 @@
             }
         }
     })
+
+
+
+
 </script>
 </body>
 </html>

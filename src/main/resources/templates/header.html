@@ -6,9 +6,9 @@
 </head>
 <header th:fragment="copy">
     <link rel="stylesheet" href="/css/header.css"/>
-<!--
-    <script src="/js/header.js"></script>
--->
+    <!--
+        <script src="/js/header.js"></script>
+    -->
     <script th:inline="javascript">
 
         function search() {
@@ -16,8 +16,8 @@
             window.location.href ="/search?keyword="+keyword;
         }
 
-           $("body").keydown(function() {
-               if (event.keyCode == "13") {//keyCode=13是回车键
+           $("header").keydown(function(e) {
+               if (e.keyCode == "13") {//keyCode=13是回车键
                    $('.enter-search').click();
                }
            });
@@ -53,15 +53,15 @@
                 </a>
             </li>
             <li style="float: right">
-                <a href="/userLogin" th:unless="${#request.remoteUser}"  class="nav-item">
+                <a th:href="@{/userLogin}" th:unless="${#request.remoteUser}"  class="nav-item">
                     <img src="/image/login_user.png" class="header-icon"/>登录/注册
                 </a>
-                <a href="/logout"  class="nav-item" th:if="${#request.remoteUser}">
+                <a th:href="@{/logout}"  class="nav-item" th:if="${#request.remoteUser}">
                     <img src="/image/login_user.png" class="header-icon" th:text="'您好,'+${#request.remoteUser}"/>
                 </a>
             </li>
             <li style="float: right;cursor: default">
-                <div class="header-search">
+                <div class="header-search" id="header-search">
                     <input type="text" class="search-input" placeholder="搜索">
                     <img src="image/search.png" class="enter-search" th:onclick="'javascript:search();'">
                 </div>
