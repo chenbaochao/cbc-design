@@ -4,7 +4,6 @@ spring:
   redis:
     host: redis
     port: 6379
-    database: 1
   session:
     store-type: redis   #集群坏境下session共享
 
@@ -35,9 +34,9 @@ logging:
     org.springframework.security.web.access.intercept: debug
 
 security:
-  propreties:
-    rememberMeSeconds: 30
-    isAutoCreateRememberTable: true  首次启动设为true
+  properties:
+    auto-create-remember-table:  #首次启动开启true
+    remember-me-seconds: 30
 
 mail:
   fromMail:

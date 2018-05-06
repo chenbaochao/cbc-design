@@ -77,7 +77,7 @@ public class VideoParserManager implements ParserManager {
     }
 
     public static void main(String[] args) {
-        Document document = JsoupUtil.getDocWithPC("http://v.qq.com/detail/s/sdp001144qaahi3.html");
+        Document document = JsoupUtil.getDocWithPC("https://v.qq.com/movie/");
 
 /*        Elements mainInfo = document.select(".wrapper_main");
         String director = mainInfo.select(".director > a").first().text();

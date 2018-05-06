@@ -3,10 +3,12 @@ package com.cbc.design.movie.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
+import com.cbc.design.movie.crawler.TencentCrawler;
 import com.cbc.design.movie.domain.Video;
 import com.cbc.design.movie.parse.ParserManager;
 import com.cbc.design.movie.redis.RedisSourceManager;
 import lombok.AllArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -34,6 +36,8 @@ public class MovieController {
 
     private final static String[] TAGS = {"QQ"};
 
+    private final TencentCrawler crawler;
+
 
     @GetMapping("/play")
     public String play(@RequestParam String url, Model model, @AuthenticationPrincipal User user) {
@@ -56,6 +60,10 @@ public class MovieController {
     @GetMapping("/movie")
     public String movie(Model model){
         List<Video> movieCarousels = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_MOVIE_CAROUSEL_KEY, TAGS[0]);
+        if(CollectionUtils.isEmpty(movieCarousels)){
+            crawler.start();
+            movieCarousels = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_MOVIE_CAROUSEL_KEY, TAGS[0]);
+        }
         model.addAttribute("movieCarousels",movieCarousels);
         return "movie";
     }

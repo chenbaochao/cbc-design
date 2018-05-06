@@ -6,7 +6,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @EnableScheduling
-@EnableRedisHttpSession
 @SpringBootApplication
 public class DesignApplication {
 

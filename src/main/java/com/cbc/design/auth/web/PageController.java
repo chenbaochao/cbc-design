@@ -7,10 +7,12 @@ import com.cbc.design.auth.web.dto.MyFriendDTO;
 import com.cbc.design.common.MyUtil;
 import com.cbc.design.common.RepeatSubmit;
 import com.cbc.design.common.TokenProcessor;
+import com.cbc.design.movie.crawler.TencentCrawler;
 import com.cbc.design.movie.domain.Video;
 import com.cbc.design.movie.redis.RedisSourceManager;
 import com.cbc.design.movie.service.SearchService;
 import lombok.AllArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -49,6 +51,8 @@ public class PageController {
     private final static String[] TAGS = {"QQ"};
 
     private final SearchService searchService;
+
+    private final TencentCrawler crawler;
 
     /**
      *  第一步注册
@@ -133,6 +137,14 @@ public class PageController {
         List<Video> tvHots = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_TV_KEY, TAGS[0]);
         List<Video> movies = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_MOVIE_KEY, TAGS[0]);
         List<Video> carToons = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CARTOON_KEY, TAGS[0]);
+        if(CollectionUtils.isEmpty(carouselPics)||CollectionUtils.isEmpty(tvHots)||CollectionUtils.isEmpty(movies)||CollectionUtils.isEmpty(carToons)){
+            crawler.start();
+            carouselPics = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CAROUSEL_KEY, TAGS[0]);
+            recommends = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_RECOMMEND_KEY, TAGS[0]);
+            tvHots = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_TV_KEY, TAGS[0]);
+            movies = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_MOVIE_KEY, TAGS[0]);
+            carToons = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CARTOON_KEY, TAGS[0]);
+        }
         model.addAttribute("carouselPics", carouselPics);
         model.addAttribute("recommends", recommends);
         model.addAttribute("tvHots", tvHots);

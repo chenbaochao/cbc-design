@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,15 +21,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -62,12 +57,12 @@ public class SecurityConfig {
     public JdbcTokenRepositoryImpl rememberMeTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
-        tokenRepository.setCreateTableOnStartup(securityProperties.getIsAutoCreateRememberTable());
+        tokenRepository.setCreateTableOnStartup(securityProperties.getAutoCreateRememberTable());
         return tokenRepository;
     }
 
 
-    @Configuration
+   /* @Configuration
     @Order(1)
     public class App1ConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
@@ -83,7 +78,7 @@ public class SecurityConfig {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http
+           *//* http
                     .antMatcher("/admin*")
                     .authorizeRequests()
                     .anyRequest().hasRole("ADMIN")
@@ -99,15 +94,15 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/adminPage")
                     // logout
                     //  .and()
-               /*     .logout()
+               *//**//*     .logout()
                     .logoutUrl("/admin_logout")
                     .logoutSuccessUrl("/protectedLinks")
                     .deleteCookies("JSESSIONID")
-                    .and().exceptionHandling().accessDeniedPage("/403")*/
-                    .and().csrf().disable();
+                    .and().exceptionHandling().accessDeniedPage("/403")*//**//*
+                    .and().csrf().disable();*//*
 
         }
-    }
+    }*/
 
     @Configuration
     @Order(2)
@@ -120,7 +115,7 @@ public class SecurityConfig {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers("/assets*", "/css*", "/image*", "/js*", "/**/favicon.ico");
+            web.ignoring().antMatchers("/assets*", "/css*", "/image*", "/js*", "/**/favicon.ico","/layui/**");
         }
 
         @Bean
