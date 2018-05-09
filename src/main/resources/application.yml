@@ -48,7 +48,7 @@ file:
 
 security:
   properties:
-    auto-create-remember-table: true
+    auto-create-remember-table:
     remember-me-seconds: 30
 
 

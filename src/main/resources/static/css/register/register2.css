@@ -78,42 +78,23 @@ a:HOVER {
 
 form {
     font-weight: 500;
-    font-size: 100%;
-    margin: 50px 30px 30px 280px;
 }
-
-form .phone {
-    border-radius: 5px;
-    height: 35px;
-    margin-bottom: 0px;
-    font-size: 18px;
+.phone,.email,.photo,.code-phone{
+    border-radius:5px;
+    font-size:18px;
+    height:30px;
+    border: #666 1px solid;
+    margin-left: 25px;
+    padding-left: 10px;
+}
+.phone,.email{
     width: 300px;
 }
 
-
-form .email {
-    border-radius: 5px;
-    height: 35px;
-    margin-bottom: 0px;
-    font-size: 18px;
-    width: 300px;
+.photo,.code-phone {
+    width: 150px;
 }
 
-form .photo {
-    border-radius: 5px;
-    height: 35px;
-    margin-bottom: 0px;
-    font-size: 18px;
-    width: 140px;
-}
-
-form .code-phone {
-    border-radius: 5px;
-    height: 35px;
-    margin-bottom: 0px;
-    font-size: 18px;
-    width: 140px;
-}
 
 img {
     border-radius: 5px;
@@ -124,16 +105,19 @@ img {
 
 .register {
     font-size: 18px;
+    text-align: center;
+    padding-top: 40px;
 }
 
 .get {
     border-radius: 5px;
-    height: 38px;
-    font-size: 20px;
+    height: 34px;
+    font-size: 18px;
     background: #1E88C7;
     padding: 2px 20px;
     cursor: pointer;
     color: white;
+    width: 150px;
 }
 
 .get:disabled {
@@ -179,23 +163,18 @@ img {
 
 .text {
     margin-left: 80px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
-.toolphone {
-    margin-left: 110px;
-    margin-bottom: 15px;
+.toolphone,.toolphone2,.toolphoto,.toolphoto2,.toolnum,.toolnum2,.email1,.email2 {
+    margin-left: 440px;
+    text-align: left;
+    color: red;
+    display: none;
+    font-size: 16px;
+    margin-bottom: -21px;
 }
 
-.toolphoto {
-    margin-left: 110px;
-    margin-bottom: 15px;
-}
-
-.toolnum {
-    margin-left: 110px;
-    margin-bottom: 15px;
-}
 
 .find {
     color: #0000ff;
@@ -205,4 +184,24 @@ img {
 }
 .protocol_close:hover{
     color: red;
+}
+.icon-arrow{
+    width: 16px;
+    height: 16px;
+    transform: translateY(-3px);
+}
+.info-title{
+    width: 124px;
+    display: inline-block;
+    text-align: right;
+    font-size: 20px;
+
+}
+.chang-code{
+    height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.info-line{
+    margin: 30px 0 10px 0;
 }

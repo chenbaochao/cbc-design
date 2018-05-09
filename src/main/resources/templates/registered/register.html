@@ -21,11 +21,11 @@
                     <span class="current-num">1</span>
                     <span class="current">验证邮箱</span>
                 </li>
-                <span class="cc">--></span>
+                <img class="icon-arrow" src="/image/arrow.png" />
                 <li class="c">
                     <span class="number">2</span>填写用户名和密码
                 </li>
-                <span class="cc">--></span>
+                <img class="icon-arrow" src="/image/arrow.png" />
                 <li class="c">
                     <span class="number">3</span>验证成功
                 </li>
@@ -34,40 +34,42 @@
         <div class="register">
             <form action="register2" method="post" class="register-info" id="form2">
                 <input type="hidden" name="token" value="${token}" th:value="${token}"/>
-                <div style="margin: 10px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;手机号码：
+                <div class="info-line">
+                    <span class="info-title">手机号码：</span>
                     <input type="tel" class="phone" id="phone" placeholder="请输入手机号码" autofocus="autofocus"
                            name="phone"/>
+                    <div id="toolphone" class="toolphone">请输入正确的手机号码</div>
+                    <div class="toolphone2">该手机已经被注册</div>
                 </div>
 
-                <div id="toolphone" class="toolphone" style="color: red;display: none;">请输入正确的手机号码</div>
-                <div class="toolphone2" style="color: red;display: none;margin-left: 110px">该手机已经被注册</div>
-                <div style="margin: 10px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮箱：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <div class="info-line">
+                    <span class="info-title">邮箱：</span>
                     <input type="tel" class="email" id="email" placeholder="请输入邮箱！" autofocus="autofocus"
                            name="email"/>
                 </div>
-                <div id="email1" class="email1" style="color: red;display: none;">请输入正确的邮箱格式</div>
-                <div class="email2" style="color: red;display: none;margin-left: 110px">该邮箱已经被注册</div>
-                <div style="margin: 10px;">
-                    图片验证码：
+                <div id="email1" class="email1">请输入正确的邮箱格式</div>
+                <div class="email2">该邮箱已经被注册</div>
+                <div class="info-line">
+                    <span class="info-title">图片验证码：</span>
                     <input type="text" class="photo" id="photo" placeholder="请输入验证码" name="photo"/>
                     <!--<img alt="" src="image.jsp" id="identity" align="absmiddle"/>-->
                     <a href="#" class="chang-code" id="changeImg">
                         <canvas class="show-captcha" id="canvas" width="150" height="40"></canvas>
                         <!--<span style="color: red">看不清？换一张</span>-->
                     </a>
-                    <input id="code" name="code" style="display: none"></input>
+                    <input id="code" name="code" style="display: none">
+                    <div style="clear: both"></div>
                 </div>
-                <div id="toolphoto" class="toolphoto" style="color: red;display: none;">图片验证码错误</div>
-                <div class="toolphoto2" style="color: red;display: none;margin-left: 110px">图片验证码不能为空</div>
-                <div style="margin: 10px;">
-                    邮箱验证码：
+                <div id="toolphoto" class="toolphoto">图片验证码错误</div>
+                <div class="toolphoto2">图片验证码不能为空</div>
+                <div class="info-line">
+                    <span class="info-title">邮箱验证码：</span>
                     <input type="text" class="code-phone" id="code_phone" placeholder="请输入验证码" name="code_phone"/>
                     <input type="button" class="get" value="发送验证码" id="get"/>
                 </div>
-                <div id="toolnum" class="toolnum" style="color: red;display: none">邮箱验证码错误</div>
-                <div class="toolnum2" style="color: red;display: none;margin-left: 110px">邮箱验证码不能为空</div>
+                <div id="toolnum" class="toolnum">邮箱验证码错误</div>
+                <div class="toolnum2">邮箱验证码不能为空</div>
                 <span class="text">
                     <input id="agree" class="agree" name="agree" type="checkbox" checked="checked"
                            style="width:20px;height:12px"/>
