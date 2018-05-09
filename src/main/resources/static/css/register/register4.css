@@ -6,7 +6,7 @@ body,html{
 	background: #f4f4f4;
 	/*font-family: KaiTi;*/
 	background: url("https://img.alicdn.com/tps/TB1h9xxIFXXXXbKXXXXXXXXXXXX.jpg") 50% fixed;
-	opacity: .9;
+	opacity: 1;
 	background-size: cover;
 	font-weight: 700;
 	font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;;
@@ -24,7 +24,7 @@ a:HOVER {
 	width:1040px;
 	min-height: 100%;
 	/*height: 100%;*/
-	background:#ffffff;
+	background:#D2D7E0;
 	margin: 50px auto ;
 }
 header{
@@ -67,8 +67,9 @@ header .current{
 
 .success{
 	font-size:22px;
-	width:260px;
-	margin:100px auto;
+	width:500px;
+	text-align: center;
+	margin:70px auto;
 }
 .next{
 	font-size:18px;
@@ -84,5 +85,22 @@ header .current{
 .icon-arrow{
 	width: 16px;
 	transform: translateY(-3px);
-}
 
+}
+.recognize-face{
+	position: relative;
+
+}
+.allow-wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.allow-face-info{
+	width: 120px;
+	height: 38px;
+	color: #fff;
+	background-color: #1E88C7;
+	border-radius: 5px;
+	border: none;
+}

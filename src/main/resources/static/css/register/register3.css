@@ -105,9 +105,11 @@ form .next{
 .alert-info{
 	position: absolute;
 	margin-left: 25px;
+	font-size: 16px;
 }
 .icon-arrow{
 	width: 16px;
+
 	transform: translateY(-3px);
 }
 
