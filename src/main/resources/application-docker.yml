@@ -36,7 +36,7 @@ logging:
 security:
   properties:
     auto-create-remember-table:  #首次启动开启true
-    remember-me-seconds: 30
+    remember-me-seconds: 30000
 
 mail:
   fromMail:
