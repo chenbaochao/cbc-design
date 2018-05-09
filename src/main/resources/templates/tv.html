@@ -20,9 +20,9 @@
 <header th:include="header :: copy"></header>
 <div class="swiper-container home-swiper">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" th:each="movieCarousel:${movieCarousels}">
-            <a th:href="@{/play(url=${movieCarousel.value})}">
-                <img th:src="${movieCarousel.image}" class="pic">
+        <div class="swiper-slide" th:each="tvCarousel:${tvCarousels}">
+            <a th:href="@{/play(url=${tvCarousel.value})}">
+                <img th:src="${tvCarousel.image}" class="pic">
             </a>
         </div>
     </div>

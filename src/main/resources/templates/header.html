@@ -37,7 +37,7 @@
                     <img src="/image/header-home.png" class="header-icon"/>首页
                 </a>
             </li>
-            <li>
+<!--            <li>
                 <a href="" class="nav-item nav-hover-border">
                     <img src="/image/music.png" class="header-icon"/>音乐
                 </a>
@@ -46,10 +46,25 @@
                 <a href=""  class="nav-item nav-hover-border">
                     <img src="/image/book.png" class="header-icon"/>书籍
                 </a>
+            </li>-->
+            <li>
+                <a th:href="@{/movie}" th:class="${#request.getRequestURI().contains('movie')} ? 'nav-item nav-item-active nav-hover-border' : 'nav-item nav-hover-border'">
+                    <img src="/image/movie.png" class="header-icon"/>电影
+                </a>
             </li>
             <li>
-                <a th:href="@{/movie}" th:class="${#request.getRequestURI().contains('video')} ? 'nav-item nav-item-active nav-hover-border' : 'nav-item nav-hover-border'">
-                    <img src="/image/movie.png" class="header-icon"/>电影
+                <a th:href="@{/tv}" th:class="${#request.getRequestURI().contains('tv')} ? 'nav-item nav-item-active nav-hover-border' : 'nav-item nav-hover-border'">
+                    <img src="/image/movie.png" class="header-icon"/>电视剧
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/recommend}" th:class="${#request.getRequestURI().contains('recommend')} ? 'nav-item nav-item-active nav-hover-border' : 'nav-item nav-hover-border'">
+                    <img src="/image/movie.png" class="header-icon"/>综艺
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/cartoon}" th:class="${#request.getRequestURI().contains('cartoon')} ? 'nav-item nav-item-active nav-hover-border' : 'nav-item nav-hover-border'">
+                    <img src="/image/movie.png" class="header-icon"/>动漫
                 </a>
             </li>
             <li style="float: right">

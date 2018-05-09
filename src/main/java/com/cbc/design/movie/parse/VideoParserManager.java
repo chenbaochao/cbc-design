@@ -1,13 +1,17 @@
 package com.cbc.design.movie.parse;
 
 import com.cbc.design.common.JsoupUtil;
+import com.cbc.design.movie.crawler.TencentCrawler;
 import com.cbc.design.movie.domain.Episode;
 import com.cbc.design.movie.domain.Star;
 import com.cbc.design.movie.domain.Video;
+import com.cbc.design.movie.domain.VideoClass;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,13 +80,5 @@ public class VideoParserManager implements ParserManager {
 
     }
 
-    public static void main(String[] args) {
-        Document document = JsoupUtil.getDocWithPC("https://v.qq.com/movie/");
 
-/*        Elements mainInfo = document.select(".wrapper_main");
-        String director = mainInfo.select(".director > a").first().text();
-        int allStar = mainInfo.select(".director").text().indexOf(director);
-        System.out.println();*/
-        System.out.println(document.select(".mod_figure_list_sm img"));
-    }
 }

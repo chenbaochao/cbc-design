@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 
 spring:
   redis:
@@ -48,8 +48,8 @@ file:
 
 security:
   properties:
-    auto-create-remember-table: true
-    remember-me-seconds: 30
+    auto-create-remember-table: false
+    remember-me-seconds: 300
 
 
 

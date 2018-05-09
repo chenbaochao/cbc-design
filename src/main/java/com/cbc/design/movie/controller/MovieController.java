@@ -5,6 +5,7 @@ import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
 import com.cbc.design.movie.crawler.TencentCrawler;
 import com.cbc.design.movie.domain.Video;
+import com.cbc.design.movie.domain.VideoClass;
 import com.cbc.design.movie.parse.ParserManager;
 import com.cbc.design.movie.redis.RedisSourceManager;
 import lombok.AllArgsConstructor;
@@ -60,11 +61,14 @@ public class MovieController {
     @GetMapping("/movie")
     public String movie(Model model){
         List<Video> movieCarousels = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_MOVIE_CAROUSEL_KEY, TAGS[0]);
-        if(CollectionUtils.isEmpty(movieCarousels)){
+        List<VideoClass> videoClasses = redisSourceManager.getVideoClassByKeyAndTag(redisSourceManager.VIDEO_PREFIX_MOVIE_KEY, TAGS[0]);
+        if(CollectionUtils.isEmpty(movieCarousels)||CollectionUtils.isEmpty(videoClasses)){
             crawler.start();
             movieCarousels = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_MOVIE_CAROUSEL_KEY, TAGS[0]);
+            videoClasses = redisSourceManager.getVideoClassByKeyAndTag(redisSourceManager.VIDEO_PREFIX_MOVIE_KEY, TAGS[0]);
         }
         model.addAttribute("movieCarousels",movieCarousels);
+        model.addAttribute("videoClasses",videoClasses);
         return "movie";
     }
 
