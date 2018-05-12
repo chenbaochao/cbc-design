@@ -323,7 +323,17 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-danger" style="background-color: rgba(0, 0, 0, .3);border: none">
                 <div class="panel-body" style="opacity: 0.8;box-shadow: 0 0 5px rgba(81, 203, 238, 1);-webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);-moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);">
-                    <form th:action="@{/userLogin}" method="post">
+                    <form style="text-align: center" class="face-login hide">
+                        <div class="login-face">
+                            <img src="">
+                            <video id="video" width="600" height="400" autoplay></video>
+                        </div>
+                        <div class="margin-top:10px">
+                            <button type="button" style="width: 200px;margin-right: 25px;" class="btn btn-danger">准备好了就确认</button>
+                            <span class="use-password-login" style="color: #f0f0f0;text-decoration: underline;cursor: pointer">账号密码登录</span>
+                        </div>
+                    </form>
+                    <form th:action="@{/userLogin}" method="post" class="password-login">
 
                         <a href="/">
                             <img src="/assets/logo.png" height="138" width="138" style="display: block; position: relative; margin: 0 auto"/>
@@ -353,6 +363,9 @@
                                         <input type="checkbox" name="remember-me" style="width: 15px;transform: translateY(2px)" value="on"/>记住密码
                                     </span>
                                     <a href="/register"><span class="glyphicon glyphicon-triangle-right"></span>创建账号</a>
+                                    <span style="color: #f0f0f0;text-decoration: underline;cursor: pointer;margin-right: 20px;" class="use-face-login">
+                                        人脸登录
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -364,6 +377,57 @@
 
 </div>
 <!-- End Content -->
+<script>
+    // var context = canvas.getContext("2d");
+    //当DOM树构建完成的时候就会执行DOMContentLoaded事件
+    var video = document.getElementById("video");
+    var mediaStream = null;
+    var track = null;
+
+    $('.use-face-login').click(function(){
+        $('.password-login').addClass('hide');
+        $('.face-login').removeClass('hide');
+     //   window.addEventListener("DOMContentLoaded", function() {
+            // //获得Canvas对象
+            // var canvas = document.getElementById("canvas");
+            //获得video摄像头区域
+
+            navigator.mediaDevices.getUserMedia({  video: true })
+                .then(function(stream) {
+                    mediaStream = stream;
+                    track = stream.getTracks()[0];
+                    // 旧的浏览器可能没有srcObject
+                    if ("srcObject" in video) {
+                        video.srcObject = stream;
+                    } else {
+                        // 防止再新的浏览器里使用它，应为它已经不再支持了
+                        video.src = window.URL.createObjectURL(stream);
+                    }
+                    video.onloadedmetadata = function(e) {
+                        video.play();
+                    };
+                })
+                .catch(function(err) {
+                    console.log(err.name + ": " + err.message);
+                });
+    //    }, false);
+    })
+    $('.use-password-login').click(function(){
+        $('.face-login').addClass('hide')
+        $('.password-login').removeClass('hide');
+        if (mediaStream != null) {
+            if (mediaStream.stop) {
+                mediaStream.stop();
+            }
+        }
+        if (track != null) {
+            if (track.stop) {
+                track.stop();
+            }
+        }
+    })
+
+</script>
 
 </body>
 

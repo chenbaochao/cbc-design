@@ -3,7 +3,8 @@
 <head>
     <title>验证成功</title>
     <link rel="stylesheet" type="text/css" href="/css/register/register4.css"/>
-    <link rel="stylesheet" type="text/css" href="/layui/layui.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <body>
@@ -37,7 +38,7 @@
                 <span class="text" th:text="注册成功，请录入面部信息">，注册成功！</span>
                 <br/>
                 <div class="recognize-face">
-                    <!--<video id="video" width="500" height="400" autoplay></video>-->
+                    <video id="video" width="500" height="400" class="hide" autoplay></video>
                     <div class="allow-wrapper">
                         <img src="/image/allow-face.png">
                         <button class="allow-face-info" type="button">录入面部信息</button>
@@ -57,62 +58,38 @@
             }
         });
         $(".allow-face-info").click(function () {
-            $(".filter").hide();
+            $('.allow-wrapper').addClass('hide');
+            $('#video').removeClass('hide');
+            navigator.mediaDevices.getUserMedia({  video: true })
+                .then(function(stream) {
+                    // 旧的浏览器可能没有srcObject
+                    if ("srcObject" in video) {
+                        video.srcObject = stream;
+                    } else {
+                        // 防止再新的浏览器里使用它，应为它已经不再支持了
+                        video.src = window.URL.createObjectURL(stream);
+                    }
+                    video.onloadedmetadata = function(e) {
+                        video.play();
+                    };
+                })
+                .catch(function(err) {
+                    console.log(err.name + ": " + err.message);
+                });
         });
     });
 </script>
 <script type="text/javascript">
     // var context = canvas.getContext("2d");
     //当DOM树构建完成的时候就会执行DOMContentLoaded事件
-    window.addEventListener("DOMContentLoaded", function() {
+/*    window.addEventListener("DOMContentLoaded", function() {
         // //获得Canvas对象
         // var canvas = document.getElementById("canvas");
         //获得video摄像头区域
         var video = document.getElementById("video");
-        var videoObj = {
-            "video" : true
-        };
-        var errBack = function(error) {
-            console.log("Video capture error: ", error.code);
-        }
 
-        /*           //获得摄像头并显示到video区域
-                   if (navigator.getUserMedia) { // Standard
-       alert(111)
-                       navigator.getUserMedia(videoObj, function(stream) {
-       console.log(stream)
-                           video.srcObject = stream;
-                       }, errBack);
-                   } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-       alert(22)
-                       navigator.webkitGetUserMedia(videoObj, function(stream) {
-                           video.src = window.webkitURL.createObjectURL(stream);
-                       }, errBack);
-                   } else if (navigator.mozGetUserMedia) { // Firefox-prefixed
-       alert(33)
-              navigator.mediaDevices.getUserMedia(videoObj, function(stream) {
-                           video.src = window.URL.createObjectURL(stream);
-                       }, errBack);
-       video.play();
-       */
 
-        navigator.mediaDevices.getUserMedia({  video: true })
-            .then(function(stream) {
-                // 旧的浏览器可能没有srcObject
-                if ("srcObject" in video) {
-                    video.srcObject = stream;
-                } else {
-                    // 防止再新的浏览器里使用它，应为它已经不再支持了
-                    video.src = window.URL.createObjectURL(stream);
-                }
-                video.onloadedmetadata = function(e) {
-                    video.play();
-                };
-            })
-            .catch(function(err) {
-                console.log(err.name + ": " + err.message);
-            });
-    }, false);
+    }, false);*/
     // // 触发拍照动作
     // document.getElementById("snap").addEventListener("click", function() {
     //     context.drawImage(video, 0, 0, 500, 400);

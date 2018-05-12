@@ -205,3 +205,8 @@ img {
 .info-line{
     margin: 30px 0 10px 0;
 }
+@media screen and (max-width: 1440px) {
+   .register{
+       padding-top: 0px;
+   }
+}
