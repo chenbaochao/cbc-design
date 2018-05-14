@@ -139,6 +139,7 @@ public class SecurityConfig {
                     .antMatchers("/user*").hasRole("USER")
                     .antMatchers("/api/register/**").permitAll()
                     .antMatchers("/","/home").permitAll()
+                    .antMatchers("/allmovie").permitAll()
                     .anyRequest().authenticated()
                     // log in
                     .and().anonymous()

@@ -203,6 +203,14 @@ public class PageController {
         return "home02";
     }
 
+    @GetMapping("/userinfo")
+    public String userInfo(){
+        return "userinfo";
+    }
 
 
+    @GetMapping("/allmovie")
+    public String allMovie(){
+        return "allmovie";
+    }
 }
