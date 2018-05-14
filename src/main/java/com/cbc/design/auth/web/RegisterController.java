@@ -5,18 +5,13 @@ import com.cbc.design.auth.service.RegisterService;
 import com.cbc.design.auth.service.UserService;
 import com.cbc.design.common.*;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * Created by cbc on 2018/3/28.
@@ -81,4 +76,12 @@ public class RegisterController {
         userService.addUser(user,token,register2_token,req);
         return ResultUtil.success();
     }
+
+
+    @PostMapping("/add/face")
+    public ResponseBean addFace(@RequestParam String email,@RequestParam String img){
+        registerService.addFace(email,img);
+        return ResultUtil.success();
+    }
+
  }

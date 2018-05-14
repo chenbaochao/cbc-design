@@ -5,6 +5,7 @@ import com.cbc.design.common.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -39,7 +40,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ValidationException.class)
     public ResponseBean handValidationException(ValidationException e){
-        log.error("异常信息为：{}");
+        log.error("异常信息为：{}",e);
         return ResultUtil.error(e.getCode(),e.getMessage());
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseBean handUsernameNotFoundException(UsernameNotFoundException e){
+        log.error("异常信息为：{}",e);
+        return ResultUtil.error(401,e.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseBean handException(Exception e){
+        log.error("异常信息为：{}",e);
+        return ResultUtil.error(500,e.getMessage());
     }
 }

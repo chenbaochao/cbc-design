@@ -12,6 +12,7 @@ import io.netty.util.internal.ConcurrentSet;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -45,6 +46,7 @@ public class UserService {
      * @param register2_token
      * @param req
      */
+    @Transactional
     public void addUser(User user, String token, String register2_token, HttpServletRequest req) {
         boolean isRepeatSubmit = RepeatSubmit.isRepeatSubmit(token, register2_token);
         if(isRepeatSubmit){

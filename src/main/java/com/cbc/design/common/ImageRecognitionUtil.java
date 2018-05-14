@@ -1,7 +1,7 @@
 package com.cbc.design.common;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baidu.aip.imagecensor.AipImageCensor;
+import com.baidu.aip.contentcensor.AipContentCensor;
 import com.cbc.design.common.Bean.Baidu;
 
 import java.io.File;
@@ -28,7 +28,7 @@ public class ImageRecognitionUtil {
 
     public boolean checkPornograp(String path){
         // 初始化一个AipImageClassifyClient
-        AipImageCensor client = new AipImageCensor(APP_ID,API_KEY,SECRET_KEY);
+        AipContentCensor client = new AipContentCensor(APP_ID,API_KEY,SECRET_KEY);
 
         // 可选：设置网络连接参数
         client.setConnectionTimeoutInMillis(2000);

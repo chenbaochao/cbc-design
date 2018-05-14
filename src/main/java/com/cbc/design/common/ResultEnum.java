@@ -24,7 +24,11 @@ public enum ResultEnum {
     CONTEXT_NOT_EMPTY(701,"说说类容不能为空！"),
     TITLE_NOT_EMPTY(702,"说说标题不能为空!"),
     CONTEXT_LENGTH(703,"说说长度不能超过122个汉字！"),
-    TITLE_LENGTH(704,"说说名称不能超过122个汉字!");
+    TITLE_LENGTH(704,"说说名称不能超过122个汉字!"),
+
+    //人脸 8--
+    FACE_FAIL(801,"录入人脸信息失败，请重新录入！"),
+    FACE_UNKNOW(802,"请把摄像头对准你的脸部！");
 
     private Integer code;
 

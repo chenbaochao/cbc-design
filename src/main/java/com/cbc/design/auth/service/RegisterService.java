@@ -2,19 +2,32 @@ package com.cbc.design.auth.service;
 
 import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
+import com.cbc.design.common.FaceRecognitionUtil;
 import com.cbc.design.common.RepeatSubmit;
 import com.cbc.design.common.ResultEnum;
 import com.cbc.design.common.SmsService;
 import com.cbc.design.common.exception.RepeatSubmitException;
+import com.cbc.design.common.exception.ValidationException;
 import lombok.AllArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.jpa.HibernateEntityManager;
+import org.hibernate.jpa.event.internal.core.HibernateEntityManagerEventListener;
 import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.misc.BASE64Decoder;
 
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -22,12 +35,14 @@ import java.util.Random;
  */
 @Service
 @AllArgsConstructor
-@Transactional
 public class RegisterService {
 
     private final UserRepository userRepository;
 
     private final SmsService smsService;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public Integer sendEmail(String phone, String photo, String email, String code, String action, HttpServletRequest req){
         //0为图片验证码错误
@@ -96,6 +111,19 @@ public class RegisterService {
     }
 
 
+    @Transactional
+    public void addFace(String email, String img) {
+        Optional<User> user = userRepository.findByEmail(email);
+        HibernateEntityManager manager = (HibernateEntityManager) this.entityManager;
+        Session session = manager.getSession();
+        session.evict(user.get());
+        if (!user.isPresent()){
+            throw new UsernameNotFoundException("没有找到相关的用户信息！");
+        }
 
-
+        boolean success = FaceRecognitionUtil.addUserFace(user.get(), img);
+        if(!success){
+            throw new ValidationException(ResultEnum.FACE_UNKNOW);
+        }
+    }
 }

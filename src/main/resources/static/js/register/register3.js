@@ -74,7 +74,7 @@ function check() {
             }), //以json格式传递
             success: function (resp) {
                 if(resp.code==200){
-                    window.location.href="/register3";
+                    window.location.href="/register3?email="+email;
                 }else{
                     layer.msg(resp.msg);
                 }

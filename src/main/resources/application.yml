@@ -6,8 +6,8 @@ spring:
     host: localhost
     port: 6379
     database: 1
-#  session:
-#    store-type: redis   #集群坏境下session共享
+  session:
+    store-type: redis   #集群坏境下session共享
 
   datasource:
     username: root

@@ -72,7 +72,7 @@ public class PageController {
         return "/registered/register";
     }
 
-/*    *//**
+    /**
      *  第二步 注册
      * @param photo
      * @param phone
@@ -81,13 +81,13 @@ public class PageController {
      * @param model
      * @param request
      * @return
-     *//*
+     */
     @RequestMapping(value = "/register2",method = {RequestMethod.POST,RequestMethod.GET})
-    public String register(@RequestParam String photo,
-                           @RequestParam String email,
-                           @RequestParam String phone,
-                           @RequestParam String code_phone,
-                           @RequestParam String token,
+    public String register(@RequestParam(required = false) String photo,
+                           @RequestParam(required = false) String email,
+                           @RequestParam(required = false) String phone,
+                           @RequestParam(required = false) String code_phone,
+                           @RequestParam(required = false) String token,
                            Model model,
                            HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -109,17 +109,8 @@ public class PageController {
         model.addAttribute("photo",photo);
         model.addAttribute("code_phone",code_phone);
         return "/registered/register2";
-    }*/
-
-    /**
-     *  第三个注册页面
-     * @return
-     */
-    @GetMapping("/register2")
-    public String register2(){
-
-        return "/registered/register2";
     }
+
 
     /**
      *  第三个注册页面

@@ -1,6 +1,9 @@
 package com.cbc.design.common.Bean;
 
 import lombok.Data;
+
+import java.util.Map;
+
 /**
  * @DESCRIPTION :百度色情图像识别pojo
  * @AUTHOR : cbc
@@ -13,4 +16,6 @@ public class BaiduData {
     private int type;
     private String class_name;
     private BaiduDataStars[] stars;
+    private String face_token;
+    private Face location;
 }

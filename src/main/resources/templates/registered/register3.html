@@ -7,6 +7,8 @@
 
 </head>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<link src="/layui/css/layui.css" rel="stylesheet"/>
+<script src="/layui/layui.all.js"></script>
 <body>
 <div class="main">
     <header>&nbsp;
@@ -18,12 +20,12 @@
                 <span class="current-num">1</span>
                 <span class="current">验证邮箱</span>
             </li>
-            <img class="icon-arrow" src="/image/arrow.png" />
+            <img class="icon-arrow" src="/image/arrow.png"/>
             <li class="current2">
                 <span class="current-num">2</span>
                 <span class="current">填写用户名和密码</span>
             </li>
-            <img class="icon-arrow" src="/image/arrow.png" />
+            <img class="icon-arrow" src="/image/arrow.png"/>
             <li class="c">
                 <span class="current-num">3</span>
                 <span class="current">验证成功</span>
@@ -31,72 +33,70 @@
         </ul>
     </header>
     <div class="success">
-            <form action="home" method="post">
-      <!--          <input type="hidden" name="password" th:value="${password}"/>
-                <input type="hidden" name="token" th:value="${token}"/>
-                <input type="hidden" name="username" th:value="${phone}"/>-->
-                <span class="text" th:text="注册成功，请录入面部信息">，注册成功！</span>
-                <br/>
-                <div class="recognize-face">
-                    <video id="video" width="500" height="400" class="hide" autoplay></video>
-                    <div class="allow-wrapper">
-                        <img src="/image/allow-face.png">
-                        <button class="allow-face-info" type="button">录入面部信息</button>
-                    </div>
-                    <!--<canvas id="canvas" width="500" height="400"></canvas>-->
+            <span class="text">注册成功，请录入面部信息</span>
+            <br/>
+            <div class="recognize-face">
+                <video id="video" width="500" height="400" class="hide" autoplay></video>
+                <div class="allow-wrapper">
+                    <img src="/image/allow-face.png">
+                    <button class="allow-face-info" type="button">录入面部信息</button>
                 </div>
-                <input type="submit" class="next" value="立即登录！" id="next"/>
-            </form>
+                <canvas id="canvas" class="hide"></canvas>
+                <button class="confim-face-info hide" type="button">确定录入</button>
+            </div>
+        <a type="button" class="next"  id="next" href="/userLogin">立即登录！</a>
     </div>
 </div>
 </body>
-<script>
-    $(function () {
-        $("body").keydown(function () {
-            if (event.keyCode == "13") {//keyCode=13是回车键
-                $('.next').click();
-            }
-        });
-        $(".allow-face-info").click(function () {
-            $('.allow-wrapper').addClass('hide');
-            $('#video').removeClass('hide');
-            navigator.mediaDevices.getUserMedia({  video: true })
-                .then(function(stream) {
-                    // 旧的浏览器可能没有srcObject
-                    if ("srcObject" in video) {
-                        video.srcObject = stream;
-                    } else {
-                        // 防止再新的浏览器里使用它，应为它已经不再支持了
-                        video.src = window.URL.createObjectURL(stream);
-                    }
-                    video.onloadedmetadata = function(e) {
-                        video.play();
-                    };
-                })
-                .catch(function(err) {
-                    console.log(err.name + ": " + err.message);
-                });
-        });
+<script th:inline="javascript">
+
+    $(".allow-face-info").click(function () {
+        $('.allow-wrapper').addClass('hide');
+        $('#video').removeClass('hide');
+        $('.confim-face-info').removeClass('hide');
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(function (stream) {
+                // 旧的浏览器可能没有srcObject
+                if ("srcObject" in video) {
+                    video.srcObject = stream;
+                } else {
+                    // 防止再新的浏览器里使用它，应为它已经不再支持了
+                    video.src = window.URL.createObjectURL(stream);
+                }
+                video.onloadedmetadata = function (e) {
+                    video.play();
+                };
+            })
+            .catch(function (err) {
+                console.log(err.name + ": " + err.message);
+            });
     });
-</script>
-<script type="text/javascript">
-    // var context = canvas.getContext("2d");
-    //当DOM树构建完成的时候就会执行DOMContentLoaded事件
-/*    window.addEventListener("DOMContentLoaded", function() {
-        // //获得Canvas对象
-        // var canvas = document.getElementById("canvas");
-        //获得video摄像头区域
-        var video = document.getElementById("video");
+    $('.confim-face-info')[0].addEventListener("click", function () {
+        var canvans = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
 
+       canvans.width = video.videoWidth;
+        canvans.height = video.videoHeight;
+        context.drawImage(video,0,0);
+        var imgData = canvans.toDataURL();
 
-    }, false);*/
-    // // 触发拍照动作
-    // document.getElementById("snap").addEventListener("click", function() {
-    //     context.drawImage(video, 0, 0, 500, 400);
-    //     var imgData = canvas.toDataURL();
-    //     var imgData1 = imgData.substring(22);
-    //     console.log(imgData)
-    //     console.log(imgData1)
-    // });
+        //获取图像在前端截取22位以后的字符串作为图像数据
+        var img = imgData.substring(22);
+
+        $.ajax({
+                type: "post",
+                url: "/api/register/add/face",
+                data:{"img":img,"email":[[${#request.getParameter("email")}]]},
+                success: function (data) {
+
+                },
+                error: function () {
+                    alert(111)
+                }
+
+        });
+
+    })
+    //  });
 </script>
 </html>
