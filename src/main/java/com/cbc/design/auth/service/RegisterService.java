@@ -114,13 +114,13 @@ public class RegisterService {
     @Transactional
     public void addFace(String email, String img) {
         Optional<User> user = userRepository.findByEmail(email);
-        HibernateEntityManager manager = (HibernateEntityManager) this.entityManager;
-        Session session = manager.getSession();
-        session.evict(user.get());
+
         if (!user.isPresent()){
             throw new UsernameNotFoundException("没有找到相关的用户信息！");
         }
-
+        HibernateEntityManager manager = (HibernateEntityManager) this.entityManager;
+        Session session = manager.getSession();
+        session.evict(user.get());
         boolean success = FaceRecognitionUtil.addUserFace(user.get(), img);
         if(!success){
             throw new ValidationException(ResultEnum.FACE_UNKNOW);
