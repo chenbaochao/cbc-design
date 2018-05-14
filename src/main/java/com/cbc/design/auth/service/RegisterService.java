@@ -2,6 +2,7 @@ package com.cbc.design.auth.service;
 
 import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
+import com.cbc.design.common.Bean.Baidu;
 import com.cbc.design.common.FaceRecognitionUtil;
 import com.cbc.design.common.RepeatSubmit;
 import com.cbc.design.common.ResultEnum;
@@ -113,17 +114,21 @@ public class RegisterService {
 
     @Transactional
     public void addFace(String email, String img) {
-        Optional<User> user = userRepository.findByEmail(email);
+        Optional<User> userOptional = userRepository.findByEmail(email);
 
-        if (!user.isPresent()){
+        if (!userOptional.isPresent()){
             throw new UsernameNotFoundException("没有找到相关的用户信息！");
         }
+        User user = userOptional.get();
         HibernateEntityManager manager = (HibernateEntityManager) this.entityManager;
         Session session = manager.getSession();
-        session.evict(user.get());
-        boolean success = FaceRecognitionUtil.addUserFace(user.get(), img);
-        if(!success){
-            throw new ValidationException(ResultEnum.FACE_UNKNOW);
+        session.evict(user);
+        user.setAutograph("");
+        user.setPassword("");
+        user.setAvatar("");
+        Baidu baidu = FaceRecognitionUtil.addUserFace(user, img);
+        if(!("SUCCESS").equalsIgnoreCase(baidu.getError_msg())) {
+            throw new ValidationException(400,baidu.getError_msg());
         }
     }
 }

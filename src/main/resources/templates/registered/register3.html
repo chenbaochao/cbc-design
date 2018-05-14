@@ -73,7 +73,7 @@
     });
     $('.confim-face-info')[0].addEventListener("click", function () {
         var canvans = document.getElementById("canvas");
-        var context = canvas.getContext("2d");
+        var context = canvans.getContext("2d");
 
        canvans.width = video.videoWidth;
         canvans.height = video.videoHeight;
@@ -88,15 +88,16 @@
                 url: "/api/register/add/face",
                 data:{"img":img,"email":[[${#request.getParameter("email")}]]},
                 success: function (data) {
-
-                },
-                error: function () {
-                    alert(111)
+                    if(data.code==200){
+                        layer.alert("录入面部信息成功！",function () {
+                            window.location.href="/userlogin";
+                        });
+                    }else{
+                        layer.msg(data.msg);
+                    }
                 }
-
         });
 
     })
-    //  });
 </script>
 </html>

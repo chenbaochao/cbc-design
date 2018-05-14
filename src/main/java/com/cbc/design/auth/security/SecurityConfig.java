@@ -2,6 +2,9 @@ package com.cbc.design.auth.security;
 
 import com.cbc.design.auth.properties.SecurityProperties;
 import com.cbc.design.auth.repositories.UserRepository;
+import com.cbc.design.auth.security.Filter.FaceAuthenticationFilter;
+import com.cbc.design.auth.security.Filter.FaceAuthenticationProvider;
+import com.cbc.design.common.Bean.Face;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -9,18 +12,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,9 +51,15 @@ public class SecurityConfig {
 
     private final SecurityProperties securityProperties;
 
+
     @Bean
     public UserDetailsService myUserDetailsService() {
         return new CustomUserDetailsService(userRepository);
+    }
+
+    @Bean
+    public AuthenticationProvider faceAuthenticationProvider(){
+        return new FaceAuthenticationProvider(userRepository);
     }
 
     @Bean
@@ -60,6 +74,12 @@ public class SecurityConfig {
         tokenRepository.setCreateTableOnStartup(securityProperties.getAutoCreateRememberTable());
         return tokenRepository;
     }
+
+/*    @Bean
+    public LoginUrlAuthenticationEntryPoint loginUrlAuthenticationEntryPoint(){
+        LoginUrlAuthenticationEntryPoint faceEntryPoint = new LoginUrlAuthenticationEntryPoint("/face/login");
+        return faceEntryPoint;
+    }*/
 
 
    /* @Configuration
@@ -118,15 +138,16 @@ public class SecurityConfig {
             web.ignoring().antMatchers("/assets*", "/css*", "/image*", "/js*", "/**/favicon.ico","/layui/**");
         }
 
-        @Bean
+   /*     @Bean
         @Override
         protected AuthenticationManager authenticationManager() throws Exception {
             return super.authenticationManager();
-        }
+        }*/
 
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(myUserDetailsService());
+            auth.userDetailsService(myUserDetailsService()).passwordEncoder(passwordEncoder());
+            auth.authenticationProvider(faceAuthenticationProvider());
         }
 
         @Override
@@ -139,6 +160,7 @@ public class SecurityConfig {
                     .antMatchers("/user*").hasRole("USER")
                     .antMatchers("/api/register/**").permitAll()
                     .antMatchers("/","/home").permitAll()
+                    .antMatchers("/face/login").permitAll()
                     .anyRequest().authenticated()
                     // log in
                     .and().anonymous()
@@ -170,6 +192,22 @@ public class SecurityConfig {
                     .maximumSessions(1)  //最大session并发数量1
                     .maxSessionsPreventsLogin(false)
                     .and().and().csrf().disable();
+            FaceAuthenticationFilter faceFilter = new FaceAuthenticationFilter();
+            faceFilter.setAuthenticationManager(authenticationManager());
+            faceFilter.setAuthenticationFailureHandler((HttpServletRequest req, HttpServletResponse resp, AuthenticationException e)-> {
+                resp.setContentType("application/json;charset=utf-8");
+                PrintWriter out = resp.getWriter();
+                StringBuilder sb = new StringBuilder();
+                sb.append("{\"code\":\"401\",\"msg\":\"");
+                sb.append(e.getMessage());
+                sb.append("\"}");
+                out.print(sb.toString());
+                out.flush();
+                out.close();
+            });
+           // http.exceptionHandling().accessDeniedPage("/face/login").authenticationEntryPoint(loginUrlAuthenticationEntryPoint());
+            http.addFilterBefore(faceFilter,UsernamePasswordAuthenticationFilter.class);
+
         }
     }
 

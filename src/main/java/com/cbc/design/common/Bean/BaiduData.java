@@ -18,4 +18,6 @@ public class BaiduData {
     private BaiduDataStars[] stars;
     private String face_token;
     private Face location;
+
+    private BaiduUser[] user_list;
 }
