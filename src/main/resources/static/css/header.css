@@ -10,7 +10,7 @@ a:hover{text-decoration:none;}
     top: 0;
 }
 .header-nav{
-    width: 1400px;
+    width: 1420px;
     margin: 0 auto;
     padding-left: 0;
 
@@ -78,8 +78,8 @@ a:hover{text-decoration:none;}
 
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1440px) {
     .header-nav{
-        width: 1200px;
+        width: 1220px;
     }
 }

@@ -79,7 +79,6 @@ header .current{
 	background: #1E88C7;
 	cursor: pointer;
 	height: 38px;
-	width:240px;
 	font-weight: 900;
 }
 .icon-arrow{
@@ -96,11 +95,15 @@ header .current{
 	justify-content: center;
 	align-items: center;
 }
-.allow-face-info{
-	width: 120px;
+.allow-face-info,.next,.confim-face-info{
+	padding: 0 20px;
 	height: 38px;
 	color: #fff;
 	background-color: #1E88C7;
 	border-radius: 5px;
 	border: none;
+	font-size: 18px;
 }
+/*.next{*/
+	/*margin-top: 50px;*/
+/*}*/

@@ -44,13 +44,15 @@
                 <canvas id="canvas" class="hide"></canvas>
                 <button class="confim-face-info hide" type="button">确定录入</button>
             </div>
-        <a type="button" class="next"  id="next" href="/userLogin">立即登录！</a>
+        <button type="button" class="next"  id="next" href="/userLogin">跳过此步，立即登录</button>
     </div>
 </div>
 </body>
 <script th:inline="javascript">
-
+    var mediaStream = null;
+    var track = null;
     $(".allow-face-info").click(function () {
+        $('#next').text('立即登录');
         $('.allow-wrapper').addClass('hide');
         $('#video').removeClass('hide');
         $('.confim-face-info').removeClass('hide');
@@ -71,7 +73,9 @@
                 console.log(err.name + ": " + err.message);
             });
     });
+
     $('.confim-face-info')[0].addEventListener("click", function () {
+
         var canvans = document.getElementById("canvas");
         var context = canvans.getContext("2d");
 

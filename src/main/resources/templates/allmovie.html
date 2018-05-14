@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
+    <meta name="applicabledevice" content="mobile">
+    <link href="/css/allmovie/allmovie.css" rel="stylesheet"/>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<header th:include="header :: copy"></header>
+<div class="type-container">
+    <div class="inner-container">
+        <div class="filter-list">
+            <a class="filter-item">电影</a>
+            <a class="filter-item current">电视剧</a>
+            <a class="filter-item">综艺</a>
+        </div>
+        <div class="type-box">
+            <div class="type-line">
+                <span class="label">类&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
+                <div class="type-content">
+                    <a class="type-item current">全部</a>
+                    <a class="type-item">偶像爱情</a>
+                    <a class="type-item">偶像爱情</a>
+                </div>
+            </div>
+            <div class="type-line">
+                <span class="label">地&nbsp;&nbsp;&nbsp;&nbsp;区：</span>
+                <div class="type-content">
+                    <a class="type-item current">全部</a>
+                    <a class="type-item">内地</a>
+                    <a class="type-item">美国</a>
+                </div>
+            </div>
+            <div class="type-line">
+                <span class="label">年&nbsp;&nbsp;&nbsp;&nbsp;份：</span>
+                <div class="type-content">
+                    <a class="type-item current">全部</a>
+                    <a class="type-item">2018</a>
+                    <a class="type-item">2017</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="inner-container padding14">
+    <div class="margin20 pr">
+        <ul class="filter-select">
+            <li class="item current"><a>最新上架</a></li>
+            <li class="item"><a>最近热播</a></li>
+            <li class="item"><a>最受好评</a></li>
+        </ul>
+        <div class="page-option">
+            <span>共<em class="em-h2">3616</em>条筛选结果</span>
+            <span><em class="em-h2">1</em>/121</span>
+            <div class="mini-page-tab">
+                <a class="mini-prev-page"><</a>
+                <a class="mini-next-page">></a>
+            </div>
+        </div>
+    </div>
+    <div class="selected-movie">
+        <ul>
+            <li class="list-item">
+                <a>
+                    <img src="image/example-movie.jpg">
+                    <p class="list-item-tit">电影1</p>
+                </a>
+            </li>
+            <li class="list-item">
+                <a>
+                    <img src="image/example-movie.jpg">
+                    <p class="list-item-tit">电影1</p>
+                </a>
+            </li>
+            <li class="list-item">
+                <a>
+                    <img src="image/example-movie.jpg">
+                    <p class="list-item-tit">电影1</p>
+                </a>
+            </li>
+            <li class="list-item">
+                <a>
+                    <img src="image/example-movie.jpg">
+                    <p class="list-item-tit">电影1</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="pages">
+        <a class="page-prev">上一页</a>
+        <span class="list-page">
+             <a class="page-num current">1</a>
+            <a class="page-ellips">....</a>
+        </span>
+        <a class="page-next">下一页</a>
+    </div>
+</div>
+</body>
+</html>

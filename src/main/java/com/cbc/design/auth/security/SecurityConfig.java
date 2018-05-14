@@ -161,6 +161,7 @@ public class SecurityConfig {
                     .antMatchers("/api/register/**").permitAll()
                     .antMatchers("/","/home").permitAll()
                     .antMatchers("/face/login").permitAll()
+                    .antMatchers("/allmovie").permitAll()
                     .anyRequest().authenticated()
                     // log in
                     .and().anonymous()
