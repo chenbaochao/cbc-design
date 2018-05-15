@@ -3,6 +3,7 @@ package com.cbc.design.auth.security.Filter;
 import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
 import com.cbc.design.auth.security.CustomUserDetails;
+import com.cbc.design.common.BaiduExceptionMatch;
 import com.cbc.design.common.Bean.Baidu;
 import com.cbc.design.common.Bean.BaiduData;
 import com.cbc.design.common.Bean.BaiduUser;
@@ -27,7 +28,7 @@ public class FaceAuthenticationProvider implements AuthenticationProvider {
         FaceAuthenticationToken authenticationToken = (FaceAuthenticationToken) authentication;
         Baidu baidu = FaceRecognitionUtil.faceRecognition((String) authenticationToken.getPrincipal());
         if(!("SUCCESS").equalsIgnoreCase(baidu.getError_msg())){
-            throw new InternalAuthenticationServiceException(baidu.getError_msg());
+            throw new InternalAuthenticationServiceException(BaiduExceptionMatch.match(baidu.getError_msg()));
         }
         BaiduData baiduData = baidu.getResult();
         BaiduUser[] userList = baiduData.getUser_list();

@@ -209,8 +209,8 @@ public class PageController {
     }
 
 
-    @GetMapping("/allmovie")
-    public String allMovie(){
-        return "allmovie";
-    }
+//    @GetMapping("/allmovie")
+//    public String allMovie(){
+//        return "allmovie";
+//    }
 }

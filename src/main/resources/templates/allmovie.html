@@ -18,44 +18,27 @@
 <div class="type-container">
     <div class="inner-container">
         <div class="filter-list">
-            <a class="filter-item">电影</a>
-            <a class="filter-item current">电视剧</a>
-            <a class="filter-item">综艺</a>
+            <a class="filter-item" th:each="title:${titles}" th:text="${title.name}" th:href="${title.url}">电影</a>
         </div>
         <div class="type-box">
-            <div class="type-line">
-                <span class="label">类&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
+            <div class="type-line" th:each="nav:${navs}">
+                <span class="label" th:text="${nav.name}">类&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
                 <div class="type-content">
-                    <a class="type-item current">全部</a>
-                    <a class="type-item">偶像爱情</a>
-                    <a class="type-item">偶像爱情</a>
+                    <a th:class="type-item" th:each="videoType:${nav.videoTypes}" th:text="${videoType.name}" th:href="${videoType.url}">全部</a>
                 </div>
             </div>
-            <div class="type-line">
-                <span class="label">地&nbsp;&nbsp;&nbsp;&nbsp;区：</span>
-                <div class="type-content">
-                    <a class="type-item current">全部</a>
-                    <a class="type-item">内地</a>
-                    <a class="type-item">美国</a>
-                </div>
-            </div>
-            <div class="type-line">
-                <span class="label">年&nbsp;&nbsp;&nbsp;&nbsp;份：</span>
-                <div class="type-content">
-                    <a class="type-item current">全部</a>
-                    <a class="type-item">2018</a>
-                    <a class="type-item">2017</a>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
 <div class="inner-container padding14">
     <div class="margin20 pr">
         <ul class="filter-select">
-            <li class="item current"><a>最新上架</a></li>
-            <li class="item"><a>最近热播</a></li>
-            <li class="item"><a>最受好评</a></li>
+            <!--<li class="item current"><a>最新上架</a></li>-->
+            <li class="item" th:each="videoSort:${videoSorts}">
+                <a th:href="${videoSort.url}" th:text="${videoSort.name}">最近热播</a>
+            </li>
+            <!--<li class="item"><a>最受好评</a></li>-->
         </ul>
         <div class="page-option">
             <span>共<em class="em-h2">3616</em>条筛选结果</span>
@@ -68,28 +51,10 @@
     </div>
     <div class="selected-movie">
         <ul>
-            <li class="list-item">
-                <a>
-                    <img src="image/example-movie.jpg">
-                    <p class="list-item-tit">电影1</p>
-                </a>
-            </li>
-            <li class="list-item">
-                <a>
-                    <img src="image/example-movie.jpg">
-                    <p class="list-item-tit">电影1</p>
-                </a>
-            </li>
-            <li class="list-item">
-                <a>
-                    <img src="image/example-movie.jpg">
-                    <p class="list-item-tit">电影1</p>
-                </a>
-            </li>
-            <li class="list-item">
-                <a>
-                    <img src="image/example-movie.jpg">
-                    <p class="list-item-tit">电影1</p>
+            <li class="list-item" th:each="video:${videos}">
+                <a th:href="@{/play(url=${video.value})}">
+                    <img th:src="${video.image}">
+                    <p class="list-item-tit" th:text="${video.title}">电影1</p>
                 </a>
             </li>
         </ul>
@@ -104,4 +69,42 @@
     </div>
 </div>
 </body>
+<script th:inline="javascript">
+
+    var sort = [[${#request.getParameter('sort')}]];
+    var theatre = [[${#request.getParameter('theatre')}]];
+    if(sort==null){
+        var list = $(".item");
+        var list_a = list.find("a");
+        for (var i = 0; i < list_a.length; i++) {
+
+            if(list_a[i].text=="最近热播"){
+              list_a[i].parentElement.className = 'item current';
+            }
+        }
+    }else if(theatre==null||theatre==''){
+        var list = $(".item");
+        var list_a = list.find("a");
+        for (var i = 0; i < list_a.length; i++) {
+            var a_String = list_a[i].toString();
+            if(a_String.indexOf('sort='+sort)!=-1&&a_String.indexOf('theatre=')!=-1){
+                list_a[i].parentElement.className = 'item';
+            }
+            if(a_String.indexOf('sort='+sort)!=-1&&a_String.indexOf('theatre=')==-1){
+                list_a[i].parentElement.className = 'item current';
+            }
+        }
+    }else {
+        var list = $(".item");
+        var list_a = list.find("a");
+        for (var i = 0; i < list_a.length; i++) {
+            var a_String = list_a[i].toString();
+            if(a_String.indexOf('theatre='+theatre)!=-1){
+                list_a[i].parentElement.className = 'item current';
+            }
+        }
+    }
+
+    console.log([[${#request.localName}]])
+</script>
 </html>

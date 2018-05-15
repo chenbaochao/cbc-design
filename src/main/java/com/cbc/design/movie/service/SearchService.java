@@ -55,35 +55,8 @@ public class SearchService {
     }
 
     public static void main(String[] args) {
-        Document document = JsoupUtil.getDocWithPC("https://v.qq.com/x/search/?q=唐人街");
-        Elements videos = document.select(".result_item_v");
-        for (Element video : videos) {
-            String totalEpisode = video.select(".figure_info").text();
-            String title = video.select(".result_title").text();
-            String allStar = video.select(".info_item_even .content a").text();
-            String director = video.select(".info_item_odd .content >a").text();
-            String introduction = video.select(".info_item_desc .desc_text").text();
-            Elements episodeElement = video.select(".result_episode_list .item");
-            String image = video.select(".result_figure >img").attr("src");
-            List<Episode> episodes = episodeElement.stream().map(u ->
-                    Episode
-                            .builder()
-                            .number(u.text())
-                            .url(u.select("a").attr("href"))
-                            .build()
-            ).collect(Collectors.toList());
-            Video
-                    .builder()
-                    .title(title)
-                    .allStar(allStar)
-                    .introduction(introduction)
-                    .director(director)
-                    .episodes(episodes)
-                    .totalEpisode(totalEpisode)
-                    .image(image)
-                    .build();
-        }
-
-        System.out.println(videos.get(0).select(".info_item_even .content").text());
+        Document document = JsoupUtil.getDocWithPC("http://v.qq.com/x/list/movie");
+        Elements select = document.select("ul.figures_list");
+        System.out.println(select);
     }
 }

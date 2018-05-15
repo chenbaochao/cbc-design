@@ -2,11 +2,8 @@ package com.cbc.design.auth.service;
 
 import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
+import com.cbc.design.common.*;
 import com.cbc.design.common.Bean.Baidu;
-import com.cbc.design.common.FaceRecognitionUtil;
-import com.cbc.design.common.RepeatSubmit;
-import com.cbc.design.common.ResultEnum;
-import com.cbc.design.common.SmsService;
 import com.cbc.design.common.exception.RepeatSubmitException;
 import com.cbc.design.common.exception.ValidationException;
 import lombok.AllArgsConstructor;
@@ -128,7 +125,7 @@ public class RegisterService {
         user.setAvatar("");
         Baidu baidu = FaceRecognitionUtil.addUserFace(user, img);
         if(!("SUCCESS").equalsIgnoreCase(baidu.getError_msg())) {
-            throw new ValidationException(400,baidu.getError_msg());
+            throw new ValidationException(400,BaiduExceptionMatch.match(baidu.getError_msg()));
         }
     }
 }
