@@ -77,6 +77,9 @@ a:hover{text-decoration:none;}
     top: 20px;
 
 }
+.login-out{
+margin-left: -17px;
+}
 
 @media screen and (max-width: 1440px) {
     .header-nav{

@@ -8,9 +8,38 @@
     <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
     <meta name="applicabledevice" content="mobile">
     <link href="/css/userinfo/userinfo.css" rel="stylesheet"/>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 <header th:include="header :: copy"></header>
-<div>dds</div>
+<div class="wrapper">
+    <div class="inner-wrapper">
+        <div class="avatar-info">
+            <div class="avatar">
+                <img src="image/actor.jpg" class="">
+            </div>
+            <button type="button" class="change-avatar">修改头像</button>
+        </div>
+        <div class="info-line">
+            <span class="info-tit">昵称</span>
+            <input value="赵宝宝" maxlength="9" />
+        </div>
+        <div class="info-line">
+            <span class="info-tit">手机</span>
+            <span>123</span>
+        </div>
+        <div class="info-line">
+            <span class="info-tit">电子邮箱</span>
+            <span>12356789@qq.com</span>
+        </div>
+        <div class="tc">
+            <button type="button" class="save">保&nbsp;&nbsp;&nbsp;存</button>
+
+        </div>
+    </div>
+</div>
 </body>
 </html>
