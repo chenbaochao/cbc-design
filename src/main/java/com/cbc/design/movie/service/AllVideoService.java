@@ -17,6 +17,15 @@ public class AllVideoService {
 
     private static final String qq = "http://v.qq.com/x/list/movie";
 
+    private static String total = "";
+
+    private static String totalPage = "";
+
+    private static String current = "";
+
+    private static String leftPage = "";
+
+    private static String rightPage = "";
 
     public List<Title> getTitles() {
         Document document = JsoupUtil.getDocWithPC(qq);
@@ -70,7 +79,7 @@ public class AllVideoService {
             from = from + "&theatre=" + theatre;
         }
         if (StringUtils.isNotBlank(sort)) {
-            from = from + "&sort="+ sort;
+            from = from + "&sort=" + sort;
         }
         Document document = JsoupUtil.getDocWithPC(from);
         List<Video> videos = new ArrayList<>();
@@ -85,8 +94,34 @@ public class AllVideoService {
             video.setValue(url);
             videos.add(video);
         }
+        Elements select = document.select("div.filter_option span");
+        total = select.get(0).select("em").text();
+        current = select.get(1).select("em").text();
+        String s = select.get(1).text();
+        totalPage = s.substring(s.indexOf(current)+1);
+        leftPage = document.select("a.nav_left").attr("href");
+        rightPage = document.select("a.nav_right").attr("href");
         return videos;
     }
 
 
+    public String getTotal() {
+        return total;
+    }
+
+    public String getCurrent() {
+        return current;
+    }
+
+    public String getTotalPage() {
+        return totalPage;
+    }
+
+    public String getLeftPage() {
+        return leftPage;
+    }
+
+    public String getRightPage() {
+        return rightPage;
+    }
 }

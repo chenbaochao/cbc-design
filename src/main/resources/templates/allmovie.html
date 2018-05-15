@@ -24,7 +24,8 @@
             <div class="type-line" th:each="nav:${navs}">
                 <span class="label" th:text="${nav.name}">类&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
                 <div class="type-content">
-                    <a th:class="type-item" th:each="videoType:${nav.videoTypes}" th:text="${videoType.name}" th:href="${videoType.url}">全部</a>
+                    <a th:class="type-item" th:each="videoType:${nav.videoTypes}" th:text="${videoType.name}"
+                       th:href="${videoType.url}">全部</a>
                 </div>
             </div>
 
@@ -41,11 +42,13 @@
             <!--<li class="item"><a>最受好评</a></li>-->
         </ul>
         <div class="page-option">
-            <span>共<em class="em-h2">3616</em>条筛选结果</span>
-            <span><em class="em-h2">1</em>/121</span>
+            <span>共<em class="em-h2" th:text="${total}">3616</em>条筛选结果</span>
+            <span><em class="em-h2" th:text="${current}"></em>[[${totalPage}]]</span>
             <div class="mini-page-tab">
-                <a class="mini-prev-page"><</a>
-                <a class="mini-next-page">></a>
+                <a class="mini-prev-page"
+                   th:href="${leftPage}"><</a>
+                <a class="mini-next-page"
+                   th:href="${rightPage}">></a>
             </div>
         </div>
     </div>
@@ -60,12 +63,12 @@
         </ul>
     </div>
     <div class="pages">
-        <a class="page-prev">上一页</a>
+        <a class="page-prev" th:href="${leftPage}">上一页</a>
         <span class="list-page">
              <a class="page-num current">1</a>
             <a class="page-ellips">....</a>
         </span>
-        <a class="page-next">下一页</a>
+        <a class="page-next" th:href="${rightPage}">下一页</a>
     </div>
 </div>
 </body>
@@ -73,33 +76,33 @@
 
     var sort = [[${#request.getParameter('sort')}]];
     var theatre = [[${#request.getParameter('theatre')}]];
-    if(sort==null){
+    if (sort == null) {
         var list = $(".item");
         var list_a = list.find("a");
         for (var i = 0; i < list_a.length; i++) {
 
-            if(list_a[i].text=="最近热播"){
-              list_a[i].parentElement.className = 'item current';
-            }
-        }
-    }else if(theatre==null||theatre==''){
-        var list = $(".item");
-        var list_a = list.find("a");
-        for (var i = 0; i < list_a.length; i++) {
-            var a_String = list_a[i].toString();
-            if(a_String.indexOf('sort='+sort)!=-1&&a_String.indexOf('theatre=')!=-1){
-                list_a[i].parentElement.className = 'item';
-            }
-            if(a_String.indexOf('sort='+sort)!=-1&&a_String.indexOf('theatre=')==-1){
+            if (list_a[i].text == "最近热播") {
                 list_a[i].parentElement.className = 'item current';
             }
         }
-    }else {
+    } else if (theatre == null || theatre == '') {
         var list = $(".item");
         var list_a = list.find("a");
         for (var i = 0; i < list_a.length; i++) {
             var a_String = list_a[i].toString();
-            if(a_String.indexOf('theatre='+theatre)!=-1){
+            if (a_String.indexOf('sort=' + sort) != -1 && a_String.indexOf('theatre=') != -1) {
+                list_a[i].parentElement.className = 'item';
+            }
+            if (a_String.indexOf('sort=' + sort) != -1 && a_String.indexOf('theatre=') == -1) {
+                list_a[i].parentElement.className = 'item current';
+            }
+        }
+    } else {
+        var list = $(".item");
+        var list_a = list.find("a");
+        for (var i = 0; i < list_a.length; i++) {
+            var a_String = list_a[i].toString();
+            if (a_String.indexOf('theatre=' + theatre) != -1) {
                 list_a[i].parentElement.className = 'item current';
             }
         }

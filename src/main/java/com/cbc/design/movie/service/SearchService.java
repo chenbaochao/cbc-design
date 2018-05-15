@@ -55,8 +55,8 @@ public class SearchService {
     }
 
     public static void main(String[] args) {
-        Document document = JsoupUtil.getDocWithPC("http://v.qq.com/x/list/movie");
-        Elements select = document.select("ul.figures_list");
-        System.out.println(select);
+        Document document = JsoupUtil.getDocWithPC("http://v.qq.com/x/list/movie?sort=18&iarea=-1&offset=0");
+        String select = document.select("div.filter_option span").get(1).select(">em").text();
+        System.out.println( document.select("a.nav_right").attr("href"));
     }
 }

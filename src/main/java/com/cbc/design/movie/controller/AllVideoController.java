@@ -45,6 +45,16 @@ public class AllVideoController {
         model.addAttribute("navs",navs);
         List<Video> videos = allVideoService.getVideos(title,offset,subtype,iarea,format,iyear,pay,ipay,exclusive,itype,plot_aspect,feature,theatre,sort,language);
         model.addAttribute("videos",videos);
+        String total = allVideoService.getTotal();
+        model.addAttribute("total",total);
+        String current = allVideoService.getCurrent();
+        model.addAttribute("current",current);
+        String totalPage = allVideoService.getTotalPage();
+        model.addAttribute("totalPage",totalPage);
+        String leftPage = allVideoService.getLeftPage();
+        model.addAttribute("leftPage",leftPage);
+        String rightPage = allVideoService.getRightPage();
+        model.addAttribute("rightPage",rightPage);
         return "allmovie";
 
     }
