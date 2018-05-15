@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.CredentialsContainer;
@@ -92,11 +93,13 @@ public class User implements Comparable,Serializable,CredentialsContainer {
      */
     public void init() {
         try {
-            Document document = Jsoup.connect("http://www.woyaogexing.com/touxiang/new/").get();
-            Elements elements = document.select("div.txList");
+            Document document = Jsoup.connect("http://www.umei.cc/touxiangtupian/QQtouxiang/").get();
+            Element select = document.getElementById("list_touxiang");
+            Elements elements = select.select("img");
+
             int size = elements.size();
             List<String> avatars = new ArrayList<>(size);
-            elements.forEach(element -> avatars.add(element.select("img.lazy").attr("src")));
+            elements.forEach(element -> avatars.add(element.attr("src")));
             Random random = new Random();
             this.avatar = avatars.get(random.nextInt(size));
             this.joinDate = LocalDate.now();
