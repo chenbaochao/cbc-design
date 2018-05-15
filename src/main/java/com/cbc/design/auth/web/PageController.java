@@ -204,13 +204,10 @@ public class PageController {
     }
 
     @GetMapping("/userinfo")
-    public String userInfo(){
+    public String userInfo(@AuthenticationPrincipal User user,Model model){
+        model.addAttribute("user",user);
         return "userinfo";
     }
 
 
-//    @GetMapping("/allmovie")
-//    public String allMovie(){
-//        return "allmovie";
-//    }
 }

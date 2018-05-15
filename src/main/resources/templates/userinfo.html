@@ -25,15 +25,15 @@
         </div>
         <div class="info-line">
             <span class="info-tit">昵称</span>
-            <input value="赵宝宝" maxlength="9" />
+            <input th:value="${user.nickname}" maxlength="9" />
         </div>
         <div class="info-line">
             <span class="info-tit">手机</span>
-            <span>123</span>
+            <span th:text="${user.phone}">123</span>
         </div>
         <div class="info-line">
             <span class="info-tit">电子邮箱</span>
-            <span>12356789@qq.com</span>
+            <span th:text="${user.email}">12356789@qq.com</span>
         </div>
         <div class="tc">
             <button type="button" class="save">保&nbsp;&nbsp;&nbsp;存</button>
