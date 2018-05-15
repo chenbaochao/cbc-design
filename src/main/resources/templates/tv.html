@@ -36,7 +36,7 @@
         <div class="recommend-tit">
             <img src="/image/movie-red.png">
             <span class="recommend-name" th:text="${videoClass.name}">热门电影</span>
-            <button class="change">换一批</button>
+            <button class="more">更多</button>
         </div>
         <ul class="home-recommend-list">
             <li class="home-recommend-cont" th:each="video,iterStat:${videoClass.videos}" th:if="${iterStat.index} < 6">

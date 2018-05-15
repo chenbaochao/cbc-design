@@ -37,16 +37,6 @@
                     <img src="/image/header-home.png" class="header-icon"/>首页
                 </a>
             </li>
-<!--            <li>
-                <a href="" class="nav-item nav-hover-border">
-                    <img src="/image/music.png" class="header-icon"/>音乐
-                </a>
-            </li>
-            <li>
-                <a href=""  class="nav-item nav-hover-border">
-                    <img src="/image/book.png" class="header-icon"/>书籍
-                </a>
-            </li>-->
             <li>
                 <a th:href="@{/movie}" th:class="${#request.getRequestURI().contains('movie')} ? 'nav-item nav-item-active nav-hover-border' : 'nav-item nav-hover-border'">
                     <img src="/image/movie.png" class="header-icon"/>电影
@@ -71,8 +61,11 @@
                 <a th:href="@{/userLogin}" th:unless="${#request.remoteUser}"  class="nav-item">
                     <img src="/image/login_user.png" class="header-icon"/>登录/注册
                 </a>
-                <a th:href="@{/logout}"  class="nav-item" th:if="${#request.remoteUser}">
+                <a th:href="@{/userinfo}"  class="nav-item" th:if="${#request.remoteUser}">
                     <img src="/image/login_user.png" class="header-icon" th:text="'您好,'+${#request.remoteUser}"/>
+                </a>
+                <a class="login-out" th:href="@{/logout}">
+                    <img src="image/exit.png" class="header-icon">
                 </a>
             </li>
             <li style="float: right;cursor: default">

@@ -21,7 +21,7 @@ ul{
     font-size: 14px;
     line-height: 26px;
 }
-.filter-item .current,.type-content .current{
+.filter-list .current,.type-content .current{
     background-color: #d81e06;
     border-radius: 15px;
     color: #fff!important;
