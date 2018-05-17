@@ -41,7 +41,10 @@ public class VideoParserManager implements ParserManager {
         String director = "";
         String allStar = "";
         if (!mainInfo.select(".director").isEmpty()) {
-            director = mainInfo.select(".director > a").first().text();
+            Elements directorElement = mainInfo.select(".director > a");
+            if(!directorElement.isEmpty()) {
+                director = mainInfo.select(".director > a").first().text();
+            }
             int directorIndex = mainInfo.select(".director").text().indexOf(director);
             allStar = mainInfo.select(".director").text().substring(directorIndex + director.length());
         }

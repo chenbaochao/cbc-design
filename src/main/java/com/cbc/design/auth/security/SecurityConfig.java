@@ -37,7 +37,7 @@ import javax.sql.DataSource;
 import java.io.PrintWriter;
 
 /**
- * Created by cbc on 2018/3/26.
+ * Created by cbc on 2018/4/18.
  */
 @Configuration
 @AllArgsConstructor
@@ -82,50 +82,8 @@ public class SecurityConfig {
     }*/
 
 
-   /* @Configuration
-    @Order(1)
-    public class App1ConfigurationAdapter extends WebSecurityConfigurerAdapter {
-
-        public App1ConfigurationAdapter() {
-            super();
-        }
-
-
-        @Override
-        public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers("/assets*", "/css*", "/image*", "/js*");
-        }
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-           *//* http
-                    .antMatcher("/admin*")
-                    .authorizeRequests()
-                    .anyRequest().hasRole("ADMIN")
-                    // log in
-                    .and()
-                    .rememberMe()
-                    .tokenRepository(rememberMeTokenRepository())
-                    .tokenValiditySeconds(securityProperties.getRememberMeSeconds())
-                    .and()
-                    .formLogin().loginPage("/admin/login").permitAll()
-                    .loginProcessingUrl("/userLogin")
-                    //    .failureUrl("/loginAdmin?error=loginError")
-                    .defaultSuccessUrl("/adminPage")
-                    // logout
-                    //  .and()
-               *//**//*     .logout()
-                    .logoutUrl("/admin_logout")
-                    .logoutSuccessUrl("/protectedLinks")
-                    .deleteCookies("JSESSIONID")
-                    .and().exceptionHandling().accessDeniedPage("/403")*//**//*
-                    .and().csrf().disable();*//*
-
-        }
-    }*/
 
     @Configuration
-    @Order(2)
     public class App2ConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
         public App2ConfigurationAdapter() {
@@ -162,6 +120,11 @@ public class SecurityConfig {
                     .antMatchers("/","/home").permitAll()
                     .antMatchers("/face/login").permitAll()
                     .antMatchers("/allmovie").permitAll()
+                    .antMatchers("/movie").permitAll()
+                    .antMatchers("/recommend").permitAll()
+                    .antMatchers("/tv").permitAll()
+                    .antMatchers("/search").permitAll()
+                    .antMatchers("/cartoon").permitAll()
                     .anyRequest().authenticated()
                     // log in
                     .and().anonymous()

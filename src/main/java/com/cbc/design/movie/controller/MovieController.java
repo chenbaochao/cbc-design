@@ -3,6 +3,7 @@ package com.cbc.design.movie.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cbc.design.auth.domain.User;
 import com.cbc.design.auth.repositories.UserRepository;
+import com.cbc.design.common.SensitivewordFilter;
 import com.cbc.design.movie.crawler.TencentCrawler;
 import com.cbc.design.movie.domain.Video;
 import com.cbc.design.movie.domain.VideoClass;

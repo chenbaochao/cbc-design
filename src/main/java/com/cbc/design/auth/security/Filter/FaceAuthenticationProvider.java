@@ -27,14 +27,17 @@ public class FaceAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         FaceAuthenticationToken authenticationToken = (FaceAuthenticationToken) authentication;
         Baidu baidu = FaceRecognitionUtil.faceRecognition((String) authenticationToken.getPrincipal());
-        if(!("SUCCESS").equalsIgnoreCase(baidu.getError_msg())){
+        if (!("SUCCESS").equalsIgnoreCase(baidu.getError_msg())) {
             throw new InternalAuthenticationServiceException(BaiduExceptionMatch.match(baidu.getError_msg()));
         }
         BaiduData baiduData = baidu.getResult();
         BaiduUser[] userList = baiduData.getUser_list();
         BaiduUser baiduUser = userList[0];
+        if (baiduUser.getScore() <= 80) {
+            throw new InternalAuthenticationServiceException("没有找到与你相关的信息,请先录入你的脸！");
+        }
         Optional<User> userOptional = userRepository.findById(Long.valueOf(baiduUser.getUser_id()));
-        if(!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             throw new InternalAuthenticationServiceException("没有找到与你相关的信息,请先录入你的脸！");
         }
         User user = userOptional.get();
