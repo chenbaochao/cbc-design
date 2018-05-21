@@ -34,9 +34,6 @@ public class VideoParserManager implements ParserManager {
         }
         String title = videoTitle.text();
         String name = document.select(".player_title a").text();
-/*
-        String englishTitle = videoTitle.select(".alias").text();
-*/
         Elements mainInfo = document.select(".wrapper_main");
         String director = "";
         String allStar = "";

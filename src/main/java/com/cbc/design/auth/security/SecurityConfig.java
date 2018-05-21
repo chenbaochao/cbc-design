@@ -149,6 +149,7 @@ public class SecurityConfig {
                             out.flush();
                             out.close();
                     })
+
                     .defaultSuccessUrl("/home")
                     // logout
                     .and().logout().logoutSuccessUrl("/userLogin").deleteCookies("JSESSIONID")

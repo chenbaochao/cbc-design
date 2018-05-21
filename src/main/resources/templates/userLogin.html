@@ -336,7 +336,7 @@
                             <span class="use-password-login" style="color: #f0f0f0;text-decoration: underline;cursor: pointer">账号密码登录</span>
                         </div>
                     </form>
-                    <form th:action="@{/userLogin}" method="post" class="password-login">
+                    <form  method="post" class="password-login">
 
                         <a href="/">
                             <img src="/assets/logo.png" height="138" width="138" style="display: block; position: relative; margin: 0 auto"/>
@@ -356,7 +356,7 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group col-md-6 col-md-offset-3 col-xs-12">
-                                <button type="submit" class="btn btn-danger btn-block">登录</button>
+                                <button type="button" class="btn btn-danger btn-block" id="login">登录</button>
                             </div>
                         </div>
                         <div class="form-group">
@@ -455,6 +455,26 @@
             }
         });
 
+    })
+
+
+    $("#login").click(function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var checkBox = $(".remember-me").val();
+
+        $.ajax({
+            type: "post",
+            url: "/userLogin",
+            data: {"username":username,"password":password,"remember-me":checkBox},
+            success: function (data) {
+                if(data.code==401){
+                    layer.alert(data.msg);
+                }else{
+                    window.location.href="/home";
+                }
+            }
+        })
     })
 
 </script>
